@@ -1,5 +1,6 @@
 import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
 import { Role } from "../roles/roles.model";
+import { UsersRoles } from "../users_roles/users_roles.model";
 
 interface UserCreationAttrs {
     email: string,
@@ -21,6 +22,6 @@ export class User extends Model<User, UserCreationAttrs>{
     @Column({type: DataType.STRING, unique: false, allowNull: false})
     password: string
 
-    @BelongsToMany(() => Role, )
+    @BelongsToMany(() => Role, () => UsersRoles)
     roles: Role[]
 }

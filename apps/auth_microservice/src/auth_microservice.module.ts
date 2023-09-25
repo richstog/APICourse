@@ -7,7 +7,9 @@ import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { User } from './users/users.model';
 import { Role } from './roles/roles.model';
-import { UsersRolesModule } from './users_roles/users_roles.module';
+
+import { JwtModule } from '@nestjs/jwt';
+import { UsersRoles } from './users_roles/users_roles.model';
 
 @Module({
   imports: [
@@ -26,9 +28,17 @@ import { UsersRolesModule } from './users_roles/users_roles.module';
     }),
     UsersModule,
     RolesModule,
-    UsersRolesModule
+    JwtModule.register({
+      secret: process.env.SECRET,
+      signOptions: {
+        expiresIn: '24h'
+      }
+    })
   ],
   controllers: [AuthMicroserviceController],
   providers: [AuthMicroserviceService],
+  exports: [
+    JwtModule
+  ]
 })
 export class AuthMicroserviceModule {}

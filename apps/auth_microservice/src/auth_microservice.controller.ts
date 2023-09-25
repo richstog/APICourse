@@ -5,8 +5,5 @@ import { AuthMicroserviceService } from './auth_microservice.service';
 export class AuthMicroserviceController {
   constructor(private readonly authMicroserviceService: AuthMicroserviceService) {}
 
-  @Get()
-  getHello(): string {
-    return this.authMicroserviceService.getHello();
-  }
+  
 }
