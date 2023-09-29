@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AuthMicroserviceController } from './auth_microservice.controller';
-import { AuthMicroserviceService } from './auth_microservice.service';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UsersModule } from './users/users.module';
@@ -10,6 +8,10 @@ import { Role } from './roles/roles.model';
 
 import { JwtModule } from '@nestjs/jwt';
 import { UsersRoles } from './users_roles/users_roles.model';
+import { AccessesModule } from './accesses/accesses.module';
+import { UsersAccessesModule } from './users_accesses/users_accesses.module';
+import { Access } from './accesses/accesses.model';
+import { UsersAccesses } from './users_accesses/uses_accesses.model';
 
 @Module({
   imports: [
@@ -19,11 +21,11 @@ import { UsersRoles } from './users_roles/users_roles.model';
     SequelizeModule.forRoot({
       dialect: 'postgres',
       host: process.env.POSTGRES_HOST,
-      port: parseInt(process.env.POSTGRES_PORT),
-      username: process.env.POSTGRES_USERNAME,
-      password: process.env.POSTGRES_PASSWORD,
-      database: process.env.POSTGRES_DATABASE,
-      models: [User, Role],
+      port: parseInt(process.env.POSTGRES_PORT) || 5432,
+      username: process.env.POSTGRES_USERNAME || 'postgres',
+      password: process.env.POSTGRES_PASSWORD || 'rhfcbkjdf29',
+      database: process.env.POSTGRES_DATABASE || 'novgu_auth_microservice',
+      models: [User, Role, Access, UsersAccesses, UsersRoles],
       autoLoadModels: true
     }),
     UsersModule,
@@ -33,10 +35,10 @@ import { UsersRoles } from './users_roles/users_roles.model';
       signOptions: {
         expiresIn: '24h'
       }
-    })
+    }),
+    AccessesModule,
+    UsersAccessesModule
   ],
-  controllers: [AuthMicroserviceController],
-  providers: [AuthMicroserviceService],
   exports: [
     JwtModule
   ]

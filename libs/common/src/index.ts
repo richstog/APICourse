@@ -1,3 +1,5 @@
 export * from './dto/registr_user.dto'
 export * from './dto/login_user.dto'
 export * from './dto/create_role.dto'
+export * from './outputs/object-operation.output'
+export * from './dto/add_user_role.dto'
