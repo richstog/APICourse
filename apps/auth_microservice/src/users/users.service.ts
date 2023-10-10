@@ -51,7 +51,6 @@ export class UsersService {
         }
         
         throw new UnauthorizedException({message: 'Incorrect email or password'})
-        
     }
 
     async generateToken(user: User) {
