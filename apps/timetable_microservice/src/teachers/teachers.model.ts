@@ -23,4 +23,6 @@ export class Teacher extends Model<Teacher, TeacherCreationAttrs> {
 
     @Column({type: DataType.STRING, allowNull: false})
     middle_name: string
+
+    
 }
