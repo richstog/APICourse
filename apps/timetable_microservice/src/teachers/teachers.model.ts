@@ -1,4 +1,9 @@
-import { BelongsToMany, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import { Auditorium } from "../auditoriums/auditoriums.model";
+import { MaketTimeTable } from "../maket_timetable/maket_timetable.model";
+import { EditTimetable } from "../edit_timetable/edit_timetable.model";
+import { Group } from "../groups/groups.model";
+import { LoadTeach } from "../load_teach/load_teach.model";
 
 
 interface TeacherCreationAttrs {
@@ -24,5 +29,18 @@ export class Teacher extends Model<Teacher, TeacherCreationAttrs> {
     @Column({type: DataType.STRING, allowNull: false})
     middle_name: string
 
-    
+    @HasMany(() => Auditorium)
+    auditoriums: Auditorium[]
+
+    @HasMany(() => MaketTimeTable)
+    maket_timetables: MaketTimeTable[]
+
+    @HasMany(() => EditTimetable)
+    edit_timetables: EditTimetable[]
+
+    @HasMany(() => Group)
+    groups: Group[]
+
+    @HasMany(() => LoadTeach)
+    loadteaches: LoadTeach[]
 }

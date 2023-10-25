@@ -1,4 +1,6 @@
-import { BelongsToMany, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import { CTS } from "../cts/cts.model";
+import { Group } from "../groups/groups.model";
 
 
 interface SpecialityCreationAttrs {
@@ -20,4 +22,10 @@ export class Speciality extends Model<Speciality, SpecialityCreationAttrs> {
 
     @Column({type: DataType.BOOLEAN, allowNull: false})
     base: string
+
+    @HasMany(() => CTS)
+    ctses: CTS[]
+
+    @HasMany(() => Group)
+    groups: Group
 }

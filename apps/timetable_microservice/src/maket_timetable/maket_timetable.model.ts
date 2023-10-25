@@ -1,4 +1,7 @@
-import { BelongsToMany, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import { Teacher } from "../teachers/teachers.model";
+import { Discipline } from "../disciplines/disciplines.model";
+import { FullTimetable } from "../full_timetable/full_timetable.model";
 
 
 interface MaketTimeTableAttrs {
@@ -12,7 +15,7 @@ interface MaketTimeTableAttrs {
 }
 
 @Table({tableName: 'maket_timetable'})
-export class EditTimetable extends Model<EditTimetable, MaketTimeTableAttrs> {
+export class MaketTimeTable extends Model<MaketTimeTable, MaketTimeTableAttrs> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number
 
@@ -28,12 +31,23 @@ export class EditTimetable extends Model<EditTimetable, MaketTimeTableAttrs> {
     @Column({type: DataType.INTEGER, allowNull: false})
     group_id: number
 
+    @ForeignKey(() => Discipline)
     @Column({type: DataType.INTEGER, allowNull: false})
     discipline_id: number
 
+    @BelongsTo(() => Discipline)
+    discipline: Discipline
+
+    @ForeignKey(() => Teacher)
     @Column({type: DataType.INTEGER, allowNull: false})
     teacher_id: number
 
+    @BelongsTo(() => Teacher)
+    teacher: Teacher
+
     @Column({type: DataType.INTEGER, allowNull: false})
     auditorium_id: number
+
+    @HasMany(() => FullTimetable)
+    full_timetable: FullTimetable[]
 }

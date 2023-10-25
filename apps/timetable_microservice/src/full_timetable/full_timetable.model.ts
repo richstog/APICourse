@@ -1,4 +1,5 @@
-import { BelongsToMany, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import { EditTimetable } from "../edit_timetable/edit_timetable.model";
 
 
 interface FullTimetableAttrs {
@@ -16,4 +17,9 @@ export class FullTimetable extends Model<FullTimetable, FullTimetableAttrs> {
 
     @Column({type: DataType.DATE, allowNull: false})
     edit_discipline: string
+
+    @HasMany(() => EditTimetable)
+    full_timetables: EditTimetable[]
+
+    
 }

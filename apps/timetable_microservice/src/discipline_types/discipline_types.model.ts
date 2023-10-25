@@ -1,4 +1,6 @@
-import { BelongsToMany, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import { Group } from "../groups/groups.model";
+import { CTS } from "../cts/cts.model";
 
 
 interface DisciplineTypeCreationAttrs {
@@ -16,4 +18,10 @@ export class DisciplineType extends Model<DisciplineType, DisciplineTypeCreation
 
     @Column({type: DataType.STRING, allowNull: false})
     abbreviation: string
+
+    @HasMany(() => Group)
+    groups: Group[]
+
+    @HasMany(() => CTS)
+    ctses: CTS[]
 }

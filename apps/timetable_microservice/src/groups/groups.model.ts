@@ -1,4 +1,8 @@
-import { BelongsToMany, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import { Teacher } from "../teachers/teachers.model";
+import { MaketTimeTable } from "../maket_timetable/maket_timetable.model";
+import { Student } from "../students/students.model";
+import { LoadTeach } from "../load_teach/load_teach.model";
 
 
 interface GroupCreationAttrs {
@@ -15,9 +19,22 @@ export class Group extends Model<Group, GroupCreationAttrs> {
     @Column({type: DataType.STRING, allowNull: false})
     number: string
 
+    @ForeignKey(() => Teacher)
     @Column({type: DataType.INTEGER, allowNull: false})
-    mentor: number
+    mentor_teacher_id: number
+
+    @BelongsTo(() => Teacher)
+    mentor_teacher: Teacher
 
     @Column({type: DataType.INTEGER, allowNull: false})
     spec: number
+
+    @HasMany(() => MaketTimeTable)
+    maket_timetables: MaketTimeTable[]
+
+    @HasMany(() => Student)
+    students: Student[]
+
+    @HasMany(() => LoadTeach)
+    loadteaches: LoadTeach[]
 }
