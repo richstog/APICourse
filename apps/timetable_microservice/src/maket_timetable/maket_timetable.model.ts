@@ -2,6 +2,8 @@ import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model,
 import { Teacher } from "../teachers/teachers.model";
 import { Discipline } from "../disciplines/disciplines.model";
 import { FullTimetable } from "../full_timetable/full_timetable.model";
+import { Auditorium } from "../auditoriums/auditoriums.model";
+import { Group } from "../groups/groups.model";
 
 
 interface MaketTimeTableAttrs {
@@ -28,25 +30,28 @@ export class MaketTimeTable extends Model<MaketTimeTable, MaketTimeTableAttrs> {
     @Column({type: DataType.STRING, allowNull: false})
     subgroup: string
 
+    @ForeignKey(() => Group)
     @Column({type: DataType.INTEGER, allowNull: false})
     group_id: number
+    @BelongsTo(() => Group)
+    group: Group
 
     @ForeignKey(() => Discipline)
     @Column({type: DataType.INTEGER, allowNull: false})
     discipline_id: number
-
     @BelongsTo(() => Discipline)
     discipline: Discipline
 
     @ForeignKey(() => Teacher)
     @Column({type: DataType.INTEGER, allowNull: false})
     teacher_id: number
-
     @BelongsTo(() => Teacher)
     teacher: Teacher
 
+    @ForeignKey(() => Auditorium)
     @Column({type: DataType.INTEGER, allowNull: false})
     auditorium_id: number
+    @BelongsTo(() => Auditorium)
 
     @HasMany(() => FullTimetable)
     full_timetable: FullTimetable[]

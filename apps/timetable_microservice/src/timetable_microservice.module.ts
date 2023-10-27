@@ -15,6 +15,18 @@ import { EditTimetableModule } from './edit_timetable/edit_timetable.module';
 import { MaketTimetableModule } from './maket_timetable/maket_timetable.module';
 import { FullTimetableModule } from './full_timetable/full_timetable.module';
 import { CtsModule } from './cts/cts.module';
+import { Auditorium } from './auditoriums/auditoriums.model';
+import { CTS } from './cts/cts.model';
+import { DisciplineType } from './discipline_types/discipline_types.model';
+import { Discipline } from './disciplines/disciplines.model';
+import { EditTimetable } from './edit_timetable/edit_timetable.model';
+import { FullTimetable } from './full_timetable/full_timetable.model';
+import { Group } from './groups/groups.model';
+import { LoadTeach } from './load_teach/load_teach.model';
+import { MaketTimeTable } from './maket_timetable/maket_timetable.model';
+import { Speciality } from './specialties/specialities.model';
+import { Student } from './students/students.model';
+import { Teacher } from './teachers/teachers.model';
 
 @Module({
   imports: [
@@ -28,7 +40,20 @@ import { CtsModule } from './cts/cts.module';
       username: process.env.POSTGRES_USERNAME,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DATABASE,
-      models: [],
+      models: [
+        Auditorium,
+        CTS,
+        DisciplineType,
+        Discipline,
+        EditTimetable,
+        FullTimetable,
+        Group,
+        LoadTeach,
+        MaketTimeTable,
+        Speciality,
+        Student,
+        Teacher
+      ],
       autoLoadModels: true
     }),
     TeachersModule,

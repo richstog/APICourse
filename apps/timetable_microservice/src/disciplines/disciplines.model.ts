@@ -24,8 +24,7 @@ export class Discipline extends Model<Discipline, DisciplineCreationAttrs> {
 
     @ForeignKey(() => DisciplineType)
     @Column({type: DataType.INTEGER, allowNull: false})
-    type_id: number
-
+    discipline_type_id: number
     @BelongsTo(() => DisciplineType)
     discipline_type: DisciplineType
 

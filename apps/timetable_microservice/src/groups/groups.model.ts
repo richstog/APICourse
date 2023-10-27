@@ -3,6 +3,7 @@ import { Teacher } from "../teachers/teachers.model";
 import { MaketTimeTable } from "../maket_timetable/maket_timetable.model";
 import { Student } from "../students/students.model";
 import { LoadTeach } from "../load_teach/load_teach.model";
+import { Speciality } from "../specialties/specialities.model";
 
 
 interface GroupCreationAttrs {
@@ -22,12 +23,14 @@ export class Group extends Model<Group, GroupCreationAttrs> {
     @ForeignKey(() => Teacher)
     @Column({type: DataType.INTEGER, allowNull: false})
     mentor_teacher_id: number
-
     @BelongsTo(() => Teacher)
     mentor_teacher: Teacher
 
+    @ForeignKey(() => Speciality)
     @Column({type: DataType.INTEGER, allowNull: false})
-    spec: number
+    spec_id: number
+    @BelongsTo(() => Speciality)
+    spec: Speciality
 
     @HasMany(() => MaketTimeTable)
     maket_timetables: MaketTimeTable[]

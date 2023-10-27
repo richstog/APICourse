@@ -1,4 +1,5 @@
-import { BelongsToMany, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { Group } from "../groups/groups.model";
 
 
 interface StudentCreationAttrs {
@@ -24,6 +25,9 @@ export class Student extends Model<Student, StudentCreationAttrs> {
     @Column({type: DataType.STRING, allowNull: false})
     middle_name: string
 
+    @ForeignKey(() => Group)
     @Column({type: DataType.INTEGER, allowNull: false})
-    groupId: number
+    group_id: number
+    @BelongsTo(() => Group)
+    group: Group
 }

@@ -1,6 +1,7 @@
 import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
 import { Teacher } from "../teachers/teachers.model";
 import { Discipline } from "../disciplines/disciplines.model";
+import { Group } from "../groups/groups.model";
 
 
 interface LoadTeachAttrs {
@@ -12,7 +13,7 @@ interface LoadTeachAttrs {
     load_subgroup
 }
 
-@Table({tableName: 'maket_timetable'})
+@Table({tableName: 'load_teach'})
 export class LoadTeach extends Model<LoadTeach, LoadTeachAttrs> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number
@@ -20,17 +21,18 @@ export class LoadTeach extends Model<LoadTeach, LoadTeachAttrs> {
     @ForeignKey(() => Teacher)
     @Column({type: DataType.INTEGER, allowNull: false})
     teacher_id: number
-
     @BelongsTo(() => Teacher)
     teacher: Teacher
 
+    @ForeignKey(() => Group)
     @Column({type: DataType.INTEGER, allowNull: false})
     group_id: number
+    @BelongsTo(() => Group)
+    group: Group
 
     @ForeignKey(() => Discipline)
     @Column({type: DataType.INTEGER, allowNull: false})
     discipline_id: number
-
     @BelongsTo(() => Discipline)
     disciplines: Discipline
 
