@@ -9,7 +9,7 @@ interface SpecialityCreationAttrs {
     base: boolean
 }
 
-@Table({tableName: 'specialities'})
+@Table({tableName: 'specialities', timestamps: false})
 export class Speciality extends Model<Speciality, SpecialityCreationAttrs> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number
@@ -21,7 +21,7 @@ export class Speciality extends Model<Speciality, SpecialityCreationAttrs> {
     title: string
 
     @Column({type: DataType.BOOLEAN, allowNull: false})
-    base: string
+    base: boolean
 
     @HasMany(() => CTS)
     ctses: CTS[]

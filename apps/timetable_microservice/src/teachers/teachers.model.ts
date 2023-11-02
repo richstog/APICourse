@@ -12,7 +12,7 @@ interface TeacherCreationAttrs {
     middle_name: string
 }
 
-@Table({tableName: 'teachers'})
+@Table({tableName: 'teachers', timestamps: false})
 export class Teacher extends Model<Teacher, TeacherCreationAttrs> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number

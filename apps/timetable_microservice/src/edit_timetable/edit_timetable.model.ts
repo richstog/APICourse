@@ -12,16 +12,16 @@ interface EditTimetableAttrs {
     edit_auditorium
 }
 
-@Table({tableName: 'edit_timetable'})
+@Table({tableName: 'edit_timetable', timestamps: false})
 export class EditTimetable extends Model<EditTimetable, EditTimetableAttrs> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number
 
     @ForeignKey(() => FullTimetable)
-    @Column({type: DataType.NUMBER, allowNull: false})
+    @Column({type: DataType.INTEGER, allowNull: false})
     full_id: number
     @BelongsTo(() => FullTimetable)
-    full_timetable: FullTimetable
+    full_timetable_fk_ET: FullTimetable
 
     @ForeignKey(() => Discipline)
     @Column({type: DataType.INTEGER, allowNull: false})

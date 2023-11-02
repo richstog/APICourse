@@ -8,7 +8,7 @@ interface AuditoriumTypeCreationAttrs {
 
 }
 
-@Table({tableName: 'auditoriums'})
+@Table({tableName: 'auditoriums', timestamps: false})
 export class Auditorium extends Model<Auditorium, AuditoriumTypeCreationAttrs> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number
@@ -26,7 +26,7 @@ export class Auditorium extends Model<Auditorium, AuditoriumTypeCreationAttrs> {
     count_computer: number
 
     @ForeignKey(() => Teacher)
-    @Column({type: DataType.DATE, allowNull: false})
+    @Column({type: DataType.INTEGER, allowNull: false})
     ownerTeacherId: number
     @BelongsTo(() => Teacher)
     teacher: Teacher

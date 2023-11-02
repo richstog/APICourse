@@ -8,7 +8,7 @@ interface StudentCreationAttrs {
     middle_name: string
 }
 
-@Table({tableName: 'students'})
+@Table({tableName: 'students', timestamps: false})
 export class Student extends Model<Student, StudentCreationAttrs> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number

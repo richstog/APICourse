@@ -13,7 +13,7 @@ interface LoadTeachAttrs {
     load_subgroup
 }
 
-@Table({tableName: 'load_teach'})
+@Table({tableName: 'load_teach', timestamps: false})
 export class LoadTeach extends Model<LoadTeach, LoadTeachAttrs> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number

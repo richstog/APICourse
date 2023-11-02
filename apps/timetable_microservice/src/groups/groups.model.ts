@@ -12,7 +12,7 @@ interface GroupCreationAttrs {
     spec: boolean
 }
 
-@Table({tableName: 'groups'})
+@Table({tableName: 'groups', timestamps: false})
 export class Group extends Model<Group, GroupCreationAttrs> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number

@@ -16,7 +16,7 @@ interface MaketTimeTableAttrs {
     auditorium_id
 }
 
-@Table({tableName: 'maket_timetable'})
+@Table({tableName: 'maket_timetable', timestamps: false})
 export class MaketTimeTable extends Model<MaketTimeTable, MaketTimeTableAttrs> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number
@@ -52,6 +52,7 @@ export class MaketTimeTable extends Model<MaketTimeTable, MaketTimeTableAttrs> {
     @Column({type: DataType.INTEGER, allowNull: false})
     auditorium_id: number
     @BelongsTo(() => Auditorium)
+    auditorium: Auditorium
 
     @HasMany(() => FullTimetable)
     full_timetable: FullTimetable[]

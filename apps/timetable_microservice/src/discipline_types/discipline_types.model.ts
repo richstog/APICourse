@@ -9,7 +9,7 @@ interface DisciplineTypeCreationAttrs {
     abbreviation: string //3
 }
 
-@Table({tableName: 'discipline_types'})
+@Table({tableName: 'discipline_types', timestamps: false})
 export class DisciplineType extends Model<DisciplineType, DisciplineTypeCreationAttrs> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number

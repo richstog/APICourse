@@ -1,4 +1,35 @@
 import { Injectable } from '@nestjs/common';
+import { Teacher } from './teachers.model';
+import { InjectModel } from '@nestjs/sequelize';
+import { CreateTeacherDto, UpdateTeacherDto } from '@app/common';
 
 @Injectable()
-export class TeachersService {}
+export class TeachersService {
+    constructor(
+        @InjectModel(Teacher) private teacherRepository: typeof Teacher,
+        ) {}
+
+        async allTeachers() {
+            const teachers = await this.teacherRepository.findAll()
+            return teachers
+        }
+
+        async oneTeacher(id: number) {
+            const teacher = await this.teacherRepository.findByPk(id)
+            return teacher
+        }
+
+        async createTeacher(dto: CreateTeacherDto) {
+            const teacher = await this.teacherRepository.create({...dto})
+            return teacher
+        }
+
+        async updateTeacher(dto: UpdateTeacherDto) {
+            const {id, ...data} = dto
+            const teacher = await this.teacherRepository.update(
+                {...data},
+                {where: {id}}
+            )
+            return teacher
+        }
+}

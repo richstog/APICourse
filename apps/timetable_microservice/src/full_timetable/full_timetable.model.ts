@@ -9,7 +9,7 @@ interface FullTimetableAttrs {
     maket_id
 }
 
-@Table({tableName: 'full_timetable'})
+@Table({tableName: 'full_timetable', timestamps: false})
 export class FullTimetable extends Model<FullTimetable, FullTimetableAttrs> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number
@@ -19,7 +19,7 @@ export class FullTimetable extends Model<FullTimetable, FullTimetableAttrs> {
 
     @ForeignKey(() => MaketTimeTable)
     @Column({type: DataType.INTEGER, allowNull: false})
-    maket_id: MaketTimeTable
+    maket_id: number
     @BelongsTo(() => MaketTimeTable)
     maket_timetable: MaketTimeTable
 

@@ -1,4 +1,35 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
+import { Group } from './groups.model';
+import { CreateGroupDto, UpdateGroupDto } from '@app/common';
 
 @Injectable()
-export class GroupsService {}
+export class GroupsService {
+    constructor(
+        @InjectModel(Group) private groupRepository: typeof Group,
+        ) {}
+
+        async allGroups() {
+            const groups = await this.groupRepository.findAll()
+            return groups
+        }
+
+        async oneGroup(id: number) {
+            const group = await this.groupRepository.findByPk(id)
+            return group
+        }
+
+        async createGroup(dto: CreateGroupDto) {
+            const group = await this.groupRepository.create({...dto})
+            return group
+        }
+
+        async updateGroup(dto: UpdateGroupDto) {
+            const {id, ...data} = dto
+            const group = await this.groupRepository.update(
+                {...data},
+                {where: {id}}
+            )
+            return group
+        }
+}

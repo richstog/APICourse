@@ -7,7 +7,7 @@ interface CTSCreationAttrs {
 
 }
 
-@Table({tableName: 'cts'})
+@Table({tableName: 'cts', timestamps: false})
 export class CTS extends Model<CTS, CTSCreationAttrs> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number
@@ -31,7 +31,7 @@ export class CTS extends Model<CTS, CTSCreationAttrs> {
     discipline_type: DisciplineType
 
     @Column({type: DataType.DATE, allowNull: false})
-    date_start: Date
+    date_start: string
 
     @Column({type: DataType.INTEGER, allowNull: false})
     count_week: number

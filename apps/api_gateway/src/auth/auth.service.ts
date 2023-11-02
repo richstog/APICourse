@@ -8,12 +8,19 @@ export class AuthService implements OnModuleInit {
     constructor(@Inject('AUTH_MICROSERVICE') private readonly authClient: ClientKafka) {}
 
     async onModuleInit() {
-        this.authClient.subscribeToResponseOf('registr_user')
-        this.authClient.subscribeToResponseOf('login_user')
-        this.authClient.subscribeToResponseOf('all_user')
-        this.authClient.subscribeToResponseOf('one_user')
-        this.authClient.subscribeToResponseOf('delete_user')
-        await this.authClient.connect()
+        const events = [
+            'registr_user',
+            'login_user',
+            'all_user',
+            'one_user',
+            'delete_user'
+        ];
+    
+        await Promise.all(
+            events.map(event => this.authClient.subscribeToResponseOf(event))
+        );
+    
+        await this.authClient.connect();
     }
     
     registrUser(registUserDto: RegistUserDto) {
