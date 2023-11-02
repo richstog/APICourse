@@ -1,6 +1,6 @@
 import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
 import { EditTimetable } from "../edit_timetable/edit_timetable.model";
-import { MaketTimeTable } from "../maket_timetable/maket_timetable.model";
+import { MaketTimetable } from "../maket_timetable/maket_timetable.model";
 import { Col } from "sequelize/types/utils";
 
 
@@ -17,11 +17,11 @@ export class FullTimetable extends Model<FullTimetable, FullTimetableAttrs> {
     @Column({type: DataType.DATE, allowNull: false})
     full_date: string
 
-    @ForeignKey(() => MaketTimeTable)
+    @ForeignKey(() => MaketTimetable)
     @Column({type: DataType.INTEGER, allowNull: false})
     maket_id: number
-    @BelongsTo(() => MaketTimeTable)
-    maket_timetable: MaketTimeTable
+    @BelongsTo(() => MaketTimetable)
+    maket_timetable: MaketTimetable
 
     @HasMany(() => EditTimetable)
     edit_timetables: EditTimetable[]

@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { MaketTimeTable } from './maket_timetable.model';
+import { MaketTimetable } from './maket_timetable.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateMaketTimetableDto, UpdateMaketTimetableDto } from '@app/common';
 
 @Injectable()
 export class MaketTimetableService {
     constructor(
-        @InjectModel(MaketTimeTable) private maketTimeTableRepository: typeof MaketTimeTable,
+        @InjectModel(MaketTimetable) private maketTimeTableRepository: typeof MaketTimetable,
         ) {}
 
         async allMaketTimetables() {

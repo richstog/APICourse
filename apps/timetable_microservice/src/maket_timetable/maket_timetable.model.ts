@@ -6,7 +6,7 @@ import { Auditorium } from "../auditoriums/auditoriums.model";
 import { Group } from "../groups/groups.model";
 
 
-interface MaketTimeTableAttrs {
+interface MaketTimetableAttrs {
     week
     weekday
     subgroup
@@ -17,7 +17,7 @@ interface MaketTimeTableAttrs {
 }
 
 @Table({tableName: 'maket_timetable', timestamps: false})
-export class MaketTimeTable extends Model<MaketTimeTable, MaketTimeTableAttrs> {
+export class MaketTimetable extends Model<MaketTimetable, MaketTimetableAttrs> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number
 

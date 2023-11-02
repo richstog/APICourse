@@ -23,7 +23,7 @@ import { EditTimetable } from './edit_timetable/edit_timetable.model';
 import { FullTimetable } from './full_timetable/full_timetable.model';
 import { Group } from './groups/groups.model';
 import { LoadTeach } from './load_teach/load_teach.model';
-import { MaketTimeTable } from './maket_timetable/maket_timetable.model';
+import { MaketTimetable } from './maket_timetable/maket_timetable.model';
 import { Speciality } from './specialties/specialities.model';
 import { Student } from './students/students.model';
 import { Teacher } from './teachers/teachers.model';

@@ -1,7 +1,7 @@
 import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
 import { DisciplineType } from "../discipline_types/discipline_types.model";
 import { LoadTeach } from "../load_teach/load_teach.model";
-import { MaketTimeTable } from "../maket_timetable/maket_timetable.model";
+import { MaketTimetable } from "../maket_timetable/maket_timetable.model";
 import { EditTimetable } from "../edit_timetable/edit_timetable.model";
 import { CTS } from "../cts/cts.model";
 
@@ -31,8 +31,8 @@ export class Discipline extends Model<Discipline, DisciplineCreationAttrs> {
     @HasMany(() => LoadTeach)
     loadteaches: LoadTeach[]
 
-    @HasMany(() => MaketTimeTable)
-    maket_timetables: MaketTimeTable[]
+    @HasMany(() => MaketTimetable)
+    maket_timetables: MaketTimetable[]
 
     @HasMany(() => EditTimetable)
     edit_timetables: EditTimetable[]

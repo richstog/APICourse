@@ -1,7 +1,8 @@
 import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
 import { Teacher } from "../teachers/teachers.model";
 import { EditTimetable } from "../edit_timetable/edit_timetable.model";
-import { MaketTimeTable } from "../maket_timetable/maket_timetable.model";
+import { MaketTimetable } from "../maket_timetable/maket_timetable.model";
+import { ApiProperty } from "@nestjs/swagger";
 
 
 interface AuditoriumTypeCreationAttrs {
@@ -10,6 +11,7 @@ interface AuditoriumTypeCreationAttrs {
 
 @Table({tableName: 'auditoriums', timestamps: false})
 export class Auditorium extends Model<Auditorium, AuditoriumTypeCreationAttrs> {
+    
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number
 
@@ -37,6 +39,6 @@ export class Auditorium extends Model<Auditorium, AuditoriumTypeCreationAttrs> {
     @HasMany(() => EditTimetable)
     edit_timetables: EditTimetable[]
 
-    @HasMany(() => MaketTimeTable)
-    maket_timetables: MaketTimeTable[]
+    @HasMany(() => MaketTimetable)
+    maket_timetables: MaketTimetable[]
 }

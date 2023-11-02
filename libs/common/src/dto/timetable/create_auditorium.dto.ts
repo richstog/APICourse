@@ -1,4 +1,5 @@
 export interface CreateAuditoriumDto {
+    
     number: number
 
     title: string
