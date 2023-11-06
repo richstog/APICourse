@@ -106,7 +106,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('all_auditorium', {})
     }
     async oneAuditorium(id: number) {
-    	return this.timetableClient.send('one_auditorium', {id})
+    	return this.timetableClient.send('one_auditorium', id)
     }
     async createAuditorium(dto: CreateAuditoriumDto) {
     	return this.timetableClient.send('create_auditorium', {...dto})
@@ -115,7 +115,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('update_auditorium', {...dto})
     }
     async deleteAuditorium(id: number) {
-    	return this.timetableClient.send('delete_auditorium', {id})
+    	return this.timetableClient.send('delete_auditorium', id)
     }
 
     //CTS gateway controllers
@@ -123,7 +123,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('all_cts', {})
     }
     async oneCTS(id: number) {
-    	return this.timetableClient.send('one_cts', {id})
+    	return this.timetableClient.send('one_cts', id)
     }
     async createCTS(dto: CreateCTSDto) {
     	return this.timetableClient.send('create_cts', {...dto})
@@ -132,7 +132,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('update_cts', {...dto})
     }
     async deleteCTS(id: number) {
-    	return this.timetableClient.send('delete_cts', {id})
+    	return this.timetableClient.send('delete_cts', id)
     }
 
     //DisciplineType gateway controllers
@@ -140,7 +140,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('all_disciplineType', {})
     }
     async oneDisciplineType(id: number) {
-    	return this.timetableClient.send('one_disciplineType', {id})
+    	return this.timetableClient.send('one_disciplineType', id)
     }
     async createDisciplineType(dto: CreateDisciplineTypeDto) {
     	return this.timetableClient.send('create_disciplineType', {...dto})
@@ -149,7 +149,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('update_disciplineType', {...dto})
     }
     async deleteDisciplineType(id: number) {
-    	return this.timetableClient.send('delete_disciplineType', {id})
+    	return this.timetableClient.send('delete_disciplineType', id)
     }
 
     //Discipline gateway controllers
@@ -157,7 +157,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('all_discipline', {})
     }
     async oneDiscipline(id: number) {
-    	return this.timetableClient.send('one_discipline', {id})
+    	return this.timetableClient.send('one_discipline', id)
     }
     async createDiscipline(dto: CreateDisciplineDto) {
     	return this.timetableClient.send('create_discipline', {...dto})
@@ -166,7 +166,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('update_discipline', {...dto})
     }
     async deleteDiscipline(id: number) {
-    	return this.timetableClient.send('delete_discipline', {id})
+    	return this.timetableClient.send('delete_discipline', id)
     }
 
     //EditTimetable gateway controllers
@@ -174,7 +174,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('all_editTimetable', {})
     }
     async oneEditTimetable(id: number) {
-    	return this.timetableClient.send('one_editTimetable', {id})
+    	return this.timetableClient.send('one_editTimetable', id)
     }
     async createEditTimetable(dto: CreateEditTimetableDto) {
     	return this.timetableClient.send('create_editTimetable', {...dto})
@@ -183,7 +183,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('update_editTimetable', {...dto})
     }
     async deleteEditTimetable(id: number) {
-    	return this.timetableClient.send('delete_editTimetable', {id})
+    	return this.timetableClient.send('delete_editTimetable', id)
     }
 
     //FullTimetable gateway controllers
@@ -191,7 +191,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('all_fullTimetable', {})
     }
     async oneFullTimetable(id: number) {
-    	return this.timetableClient.send('one_fullTimetable', {id})
+    	return this.timetableClient.send('one_fullTimetable', id)
     }
     async createFullTimetable(dto: CreateFullTimetableDto) {
     	return this.timetableClient.send('create_fullTimetable', {...dto})
@@ -200,7 +200,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('update_fullTimetable', {...dto})
     }
     async deleteFullTimetable(id: number) {
-    	return this.timetableClient.send('delete_fullTimetable', {id})
+    	return this.timetableClient.send('delete_fullTimetable', id)
     }
 
     //Group gateway controllers
@@ -208,7 +208,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('all_group', {})
     }
     async oneGroup(id: number) {
-    	return this.timetableClient.send('one_group', {id})
+    	return this.timetableClient.send('one_group', id)
     }
     async createGroup(dto: CreateGroupDto) {
     	return this.timetableClient.send('create_group', {...dto})
@@ -217,7 +217,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('update_group', {...dto})
     }
     async deleteGroup(id: number) {
-    	return this.timetableClient.send('delete_group', {id})
+    	return this.timetableClient.send('delete_group', id)
     }
 
     //LoadTeach gateway controllers
@@ -225,7 +225,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('all_loadTeach', {})
     }
     async oneLoadTeach(id: number) {
-    	return this.timetableClient.send('one_loadTeach', {id})
+    	return this.timetableClient.send('one_loadTeach', id)
     }
     async createLoadTeach(dto: CreateLoadTeachDto) {
     	return this.timetableClient.send('create_loadTeach', {...dto})
@@ -234,7 +234,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('update_loadTeach', {...dto})
     }
     async deleteLoadTeach(id: number) {
-    	return this.timetableClient.send('delete_loadTeach', {id})
+    	return this.timetableClient.send('delete_loadTeach', id)
     }
 
     //MaketTimetable gateway controllers
@@ -242,7 +242,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('all_maketTimetable', {})
     }
     async oneMaketTimetable(id: number) {
-    	return this.timetableClient.send('one_maketTimetable', {id})
+    	return this.timetableClient.send('one_maketTimetable', id)
     }
     async createMaketTimetable(dto: CreateMaketTimetableDto) {
     	return this.timetableClient.send('create_maketTimetable', {...dto})
@@ -251,7 +251,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('update_maketTimetable', {...dto})
     }
     async deleteMaketTimetable(id: number) {
-    	return this.timetableClient.send('delete_maketTimetable', {id})
+    	return this.timetableClient.send('delete_maketTimetable', id)
     }
 
     //Speciality gateway controllers
@@ -259,7 +259,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('all_speciality', {})
     }
     async oneSpeciality(id: number) {
-    	return this.timetableClient.send('one_speciality', {id})
+    	return this.timetableClient.send('one_speciality', id)
     }
     async createSpeciality(dto: CreateSpecialityDto) {
     	return this.timetableClient.send('create_speciality', {...dto})
@@ -268,7 +268,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('update_speciality', {...dto})
     }
     async deleteSpeciality(id: number) {
-    	return this.timetableClient.send('delete_speciality', {id})
+    	return this.timetableClient.send('delete_speciality', id)
     }
 
     //Student gateway controllers
@@ -276,7 +276,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('all_student', {})
     }
     async oneStudent(id: number) {
-    	return this.timetableClient.send('one_student', {id})
+    	return this.timetableClient.send('one_student', id)
     }
     async createStudent(dto: CreateStudentDto) {
     	return this.timetableClient.send('create_student', {...dto})
@@ -285,7 +285,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('update_student', {...dto})
     }
     async deleteStudent(id: number) {
-    	return this.timetableClient.send('delete_student', {id})
+    	return this.timetableClient.send('delete_student', id)
     }
 
     //Teacher gateway controllers
@@ -293,7 +293,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('all_teacher', {})
     }
     async oneTeacher(id: number) {
-    	return this.timetableClient.send('one_teacher', {id})
+    	return this.timetableClient.send('one_teacher', id)
     }
     async createTeacher(dto: CreateTeacherDto) {
     	return this.timetableClient.send('create_teacher', {...dto})
@@ -302,6 +302,6 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('update_teacher', {...dto})
     }
     async deleteTeacher(id: number) {
-    	return this.timetableClient.send('delete_teacher', {id})
+    	return this.timetableClient.send('delete_teacher', id)
     }
 }
