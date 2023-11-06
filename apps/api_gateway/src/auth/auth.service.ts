@@ -1,4 +1,4 @@
-import { LoginUserDto, RegistUserDto } from '@app/common';
+import { CreateUserRoleDto, LoginUserDto, RegistUserDto } from '@app/common';
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 
@@ -12,7 +12,7 @@ export class AuthService implements OnModuleInit {
             'registr_user',
             'login_user',
             'all_user',
-            'one_user',
+            'get_user_by_login',
             'delete_user'
         ];
     
@@ -23,23 +23,33 @@ export class AuthService implements OnModuleInit {
         await this.authClient.connect();
     }
     
+
+    // Users
     registrUser(registUserDto: RegistUserDto) {
-        return this.authClient.send('registr_user', {})
+        return this.authClient.send('registr_user', {...registUserDto})
     }
 
     loginUser(loginUserDto: LoginUserDto) {
-        return this.authClient.send('login_user', {})
+        return this.authClient.send('login_user', {...loginUserDto})
     }
 
     allUsers() {
         return this.authClient.send('all_user', {})
     }
 
-    oneUser(id: number) {
-        return this.authClient.send('one_user', {})
+    getUserByLogin(login: string) {
+        return this.authClient.send('get_user_by_login', login)
     }
 
-    deleteUser() {
-        return this.authClient.send('delete_user', {})
+    deleteUser(id: number) {
+        return this.authClient.send('delete_user', id)
+    }
+
+    async addRoleToUser(createUserRoleDto: CreateUserRoleDto) {
+        
+    }
+
+    async deleteRoleToUser(createUserRoleDto: CreateUserRoleDto) {
+        
     }
 }

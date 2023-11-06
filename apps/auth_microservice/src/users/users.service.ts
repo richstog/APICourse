@@ -5,6 +5,7 @@ import { CreateUserRoleDto, LoginUserDto, RegistUserDto } from '@app/common';
 import { RolesService } from '../roles/roles.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt'
+import { json } from 'sequelize';
 
 @Injectable()
 export class UsersService {
@@ -68,5 +69,10 @@ export class UsersService {
             return dto
         }
         throw new HttpException('User or role is not defined', HttpStatus.BAD_REQUEST)
+    }
+
+    async deleteUser(id: number) {
+        const user = this.userRepository.destroy({where: {id}})
+        return user
     }
 }

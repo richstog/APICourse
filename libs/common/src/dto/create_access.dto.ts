@@ -1,9 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger"
 
-export class CreateRoleDto {
+export class CreateAccessDto {
     @ApiProperty()
     value: string
 
     @ApiProperty()
-    description?: string
+    description: string
 }
