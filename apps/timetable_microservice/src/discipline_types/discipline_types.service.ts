@@ -11,17 +11,17 @@ export class DisciplineTypesService {
 
         async allDisciplineTypes() {
             const disciplineTypes = await this.disciplineTypeRepository.findAll()
-            return disciplineTypes
+            return JSON.stringify(disciplineTypes)
         }
 
         async oneDisciplineType(id: number) {
             const disciplineType = await this.disciplineTypeRepository.findByPk(id)
-            return disciplineType
+            return JSON.stringify(disciplineType)
         }
 
         async createDisciplineType(dto: CreateDisciplineTypeDto) {
             const disciplineType = await this.disciplineTypeRepository.create({...dto})
-            return disciplineType
+            return JSON.stringify(disciplineType)
         }
 
         async updateDisciplineType(dto: UpdateDisciplineTypeDto) {
@@ -30,6 +30,6 @@ export class DisciplineTypesService {
                 {...data},
                 {where: {id}}
             )
-            return disciplineType
+            return JSON.stringify(disciplineType)
         }
 }

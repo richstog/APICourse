@@ -11,17 +11,17 @@ export class MaketTimetableService {
 
         async allMaketTimetables() {
             const maketTimeTables = await this.maketTimeTableRepository.findAll()
-            return maketTimeTables
+            return JSON.stringify(maketTimeTables)
         }
 
         async oneMaketTimetable(id: number) {
             const maketTimeTable = await this.maketTimeTableRepository.findByPk(id)
-            return maketTimeTable
+            return JSON.stringify(maketTimeTable)
         }
 
         async createMaketTimetable(dto: CreateMaketTimetableDto) {
             const maketTimeTable = await this.maketTimeTableRepository.create({...dto})
-            return maketTimeTable
+            return JSON.stringify(maketTimeTable)
         }
 
         async updateMaketTimetable(dto: UpdateMaketTimetableDto) {
@@ -30,6 +30,6 @@ export class MaketTimetableService {
                 {...data},
                 {where: {id}}
             )
-            return maketTimeTable
+            return JSON.stringify(maketTimeTable)
         }
 }

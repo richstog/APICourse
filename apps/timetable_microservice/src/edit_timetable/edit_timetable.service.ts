@@ -11,17 +11,17 @@ export class EditTimetableService {
 
         async allEditTimetables() {
             const editTimetables = await this.editTimetableRepository.findAll()
-            return editTimetables
+            return JSON.stringify(editTimetables)
         }
 
         async oneEditTimetable(id: number) {
             const editTimetable = await this.editTimetableRepository.findByPk(id)
-            return editTimetable
+            return JSON.stringify(editTimetable)
         }
 
         async createEditTimetable(dto: CreateEditTimetableDto) {
             const editTimetable = await this.editTimetableRepository.create({...dto})
-            return editTimetable
+            return JSON.stringify(editTimetable)
         }
 
         async updateEditTimetable(dto: UpdateEditTimetableDto) {
@@ -30,6 +30,6 @@ export class EditTimetableService {
                 {...data},
                 {where: {id}}
             )
-            return editTimetable
+            return JSON.stringify(editTimetable)
         }
 }

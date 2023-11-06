@@ -11,17 +11,17 @@ export class SpecialtiesService {
 
         async allSpecialties() {
             const specialities = await this.specialityRepository.findAll()
-            return specialities
+            return JSON.stringify(specialities)
         }
 
         async oneSpeciality(id: number) {
             const speciality = await this.specialityRepository.findByPk(id)
-            return speciality
+            return JSON.stringify(speciality)
         }
 
         async createSpeciality(dto: CreateSpecialityDto) {
             const speciality = await this.specialityRepository.create({...dto})
-            return speciality
+            return JSON.stringify(speciality)
         }
 
         async updateSpeciality(dto: UpdateSpecialityDto) {
@@ -30,6 +30,6 @@ export class SpecialtiesService {
                 {...data},
                 {where: {id}}
             )
-            return speciality
+            return JSON.stringify(speciality)
         }
 }

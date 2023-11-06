@@ -11,17 +11,17 @@ export class LoadTeachService {
 
         async allLoadTeaches() {
             const loadTeaches = await this.loadTeachRepository.findAll()
-            return loadTeaches
+            return JSON.stringify(loadTeaches)
         }
 
         async oneLoadTeach(id: number) {
             const loadTeach = await this.loadTeachRepository.findByPk(id)
-            return loadTeach
+            return JSON.stringify(loadTeach)
         }
 
         async createLoadTeach(dto: CreateLoadTeachDto) {
             const loadTeach = await this.loadTeachRepository.create({...dto})
-            return loadTeach
+            return JSON.stringify(loadTeach)
         }
 
         async updateLoadTeach(dto: UpdateLoadTeachDto) {
@@ -30,6 +30,6 @@ export class LoadTeachService {
                 {...data},
                 {where: {id}}
             )
-            return loadTeach
+            return JSON.stringify(loadTeach)
         }
 }

@@ -11,17 +11,17 @@ export class CtsService {
 
         async allCTSes() {
             const ctses = await this.ctsRepository.findAll()
-            return ctses
+            return JSON.stringify(ctses)
         }
 
         async oneCTS(id: number) {
             const cts = await this.ctsRepository.findByPk(id)
-            return cts
+            return JSON.stringify(cts)
         }
 
         async createCTS(dto: CreateCTSDto) {
             const cts = await this.ctsRepository.create({...dto})
-            return cts
+            return JSON.stringify(cts)
         }
 
         async updateCTS(dto: UpdateCTSDto) {
@@ -30,6 +30,6 @@ export class CtsService {
                 {...data},
                 {where: {id}}
             )
-            return cts
+            return JSON.stringify(cts)
         }
 }

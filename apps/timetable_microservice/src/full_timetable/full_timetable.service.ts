@@ -11,17 +11,17 @@ export class FullTimetableService {
 
         async allFullTimetables() {
             const fullTimetables = await this.fullTimetableRepository.findAll()
-            return fullTimetables
+            return JSON.stringify(fullTimetables)
         }
 
         async oneFullTimetable(id: number) {
             const fullTimetable = await this.fullTimetableRepository.findByPk(id)
-            return fullTimetable
+            return JSON.stringify(fullTimetable)
         }
 
         async createFullTimetable(dto: CreateFullTimetableDto) {
             const fullTimetable = await this.fullTimetableRepository.create({...dto})
-            return fullTimetable
+            return JSON.stringify(fullTimetable)
         }
 
         async updateFullTimetable(dto: UpdateFullTimetableDto) {
@@ -30,6 +30,6 @@ export class FullTimetableService {
                 {...data},
                 {where: {id}}
             )
-            return fullTimetable
+            return JSON.stringify(fullTimetable)
         }
 }

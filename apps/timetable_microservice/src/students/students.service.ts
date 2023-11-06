@@ -11,17 +11,17 @@ export class StudentsService {
 
         async allStudents() {
             const students = await this.studentRepository.findAll()
-            return students
+            return JSON.stringify(students)
         }
 
         async oneStudent(id: number) {
             const student = await this.studentRepository.findByPk(id)
-            return student
+            return JSON.stringify(student)
         }
 
         async createStudent(dto: CreateStudentDto) {
             const student = await this.studentRepository.create({...dto})
-            return student
+            return JSON.stringify(student)
         }
 
         async updateStudent(dto: UpdateStudentDto) {
@@ -30,6 +30,6 @@ export class StudentsService {
                 {...data},
                 {where: {id}}
             )
-            return student
+            return JSON.stringify(student)
         }
 }

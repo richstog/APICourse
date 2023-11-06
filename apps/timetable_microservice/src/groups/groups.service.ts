@@ -11,17 +11,17 @@ export class GroupsService {
 
         async allGroups() {
             const groups = await this.groupRepository.findAll()
-            return groups
+            return JSON.stringify(groups)
         }
 
         async oneGroup(id: number) {
             const group = await this.groupRepository.findByPk(id)
-            return group
+            return JSON.stringify(group)
         }
 
         async createGroup(dto: CreateGroupDto) {
             const group = await this.groupRepository.create({...dto})
-            return group
+            return JSON.stringify(group)
         }
 
         async updateGroup(dto: UpdateGroupDto) {
@@ -30,6 +30,6 @@ export class GroupsService {
                 {...data},
                 {where: {id}}
             )
-            return group
+            return JSON.stringify(group)
         }
 }

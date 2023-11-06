@@ -2,6 +2,7 @@ import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model,
 import { EditTimetable } from "../edit_timetable/edit_timetable.model";
 import { MaketTimetable } from "../maket_timetable/maket_timetable.model";
 import { Col } from "sequelize/types/utils";
+import { ApiProperty } from "@nestjs/swagger";
 
 
 interface FullTimetableAttrs {
@@ -11,12 +12,15 @@ interface FullTimetableAttrs {
 
 @Table({tableName: 'full_timetable', timestamps: false})
 export class FullTimetable extends Model<FullTimetable, FullTimetableAttrs> {
+    @ApiProperty()
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number
 
+    @ApiProperty()
     @Column({type: DataType.DATE, allowNull: false})
     full_date: string
 
+    @ApiProperty()
     @ForeignKey(() => MaketTimetable)
     @Column({type: DataType.INTEGER, allowNull: false})
     maket_id: number

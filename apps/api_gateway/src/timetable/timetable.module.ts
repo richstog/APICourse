@@ -11,10 +11,10 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         transport: Transport.KAFKA,
         options: {
           client: {
-            clientId: 'auth',
+            clientId: 'timetable',
             brokers: ['localhost:9092']
           },
-          producerOnlyMode: true,
+          //producerOnlyMode: true,
           consumer: {
             groupId: 'timetable_consumer'
           }
@@ -23,6 +23,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     ])
   ],
   providers: [TimetableService],
-  controllers: [TimetableController]
+  controllers: [TimetableController],
+  exports: []
 })
 export class TimetableModule {}

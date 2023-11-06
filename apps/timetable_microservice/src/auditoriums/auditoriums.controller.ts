@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { AuditoriumsService } from './auditoriums.service';
 import { CreateAuditoriumDto, UpdateAuditoriumDto } from '@app/common';

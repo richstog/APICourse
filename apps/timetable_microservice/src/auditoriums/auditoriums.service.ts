@@ -11,17 +11,17 @@ export class AuditoriumsService {
 
         async allAuditoriums() {
             const auditoriums = await this.auditoriumRepository.findAll()
-            return auditoriums
+            return JSON.stringify(auditoriums)
         }
 
         async oneAuditorium(id: number) {
             const auditorium = await this.auditoriumRepository.findByPk(id)
-            return auditorium
+            return JSON.stringify(auditorium)
         }
 
         async createAuditorium(dto: CreateAuditoriumDto) {
-            const auditorium = await this.auditoriumRepository.create({...dto})
-            return auditorium
+            const auditorium = await this.auditoriumRepository.create(dto)
+            return JSON.stringify(auditorium)
         }
 
         async updateAuditorium(dto: UpdateAuditoriumDto) {
@@ -30,6 +30,6 @@ export class AuditoriumsService {
                 {...data},
                 {where: {id}}
             )
-            return auditorium
+            return JSON.stringify(auditorium)
         }
 }

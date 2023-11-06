@@ -24,20 +24,19 @@ import {
     CreateTeacherDto,
     UpdateTeacherDto,
 } from '@app/common';
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 
 @Injectable()
-export class TimetableService {
+export class TimetableService implements OnModuleInit {
     constructor(@Inject('TIMETABLE_MICROSERVICE') private readonly timetableClient: ClientKafka) {}
-
     async onModuleInit() {
         const events = [
-            'all_auditoriums',
-            'one_auditoriums',
-            'create_auditoriums',
-            'update_auditoriums',
-            'delete_auditoriums',
+            'all_auditorium',
+            'one_auditorium',
+            'create_auditorium',
+            'update_auditorium',
+            'delete_auditorium',
             'all_cts',
             'one_cts',
             'create_cts',
@@ -110,10 +109,10 @@ export class TimetableService {
     	return this.timetableClient.send('one_auditorium', {id})
     }
     async createAuditorium(dto: CreateAuditoriumDto) {
-    	return this.timetableClient.send('create_auditorium', {dto})
+    	return this.timetableClient.send('create_auditorium', {...dto})
     }
     async updateAuditorium(dto: UpdateAuditoriumDto) {
-    	return this.timetableClient.send('update_auditorium', {dto})
+    	return this.timetableClient.send('update_auditorium', {...dto})
     }
     async deleteAuditorium(id: number) {
     	return this.timetableClient.send('delete_auditorium', {id})
@@ -127,10 +126,10 @@ export class TimetableService {
     	return this.timetableClient.send('one_cts', {id})
     }
     async createCTS(dto: CreateCTSDto) {
-    	return this.timetableClient.send('create_cts', {dto})
+    	return this.timetableClient.send('create_cts', {...dto})
     }
     async updateCTS(dto: UpdateCTSDto) {
-    	return this.timetableClient.send('update_cts', {dto})
+    	return this.timetableClient.send('update_cts', {...dto})
     }
     async deleteCTS(id: number) {
     	return this.timetableClient.send('delete_cts', {id})
@@ -144,10 +143,10 @@ export class TimetableService {
     	return this.timetableClient.send('one_disciplineType', {id})
     }
     async createDisciplineType(dto: CreateDisciplineTypeDto) {
-    	return this.timetableClient.send('create_disciplineType', {dto})
+    	return this.timetableClient.send('create_disciplineType', {...dto})
     }
     async updateDisciplineType(dto: UpdateDisciplineTypeDto) {
-    	return this.timetableClient.send('update_disciplineType', {dto})
+    	return this.timetableClient.send('update_disciplineType', {...dto})
     }
     async deleteDisciplineType(id: number) {
     	return this.timetableClient.send('delete_disciplineType', {id})
@@ -161,10 +160,10 @@ export class TimetableService {
     	return this.timetableClient.send('one_discipline', {id})
     }
     async createDiscipline(dto: CreateDisciplineDto) {
-    	return this.timetableClient.send('create_discipline', {dto})
+    	return this.timetableClient.send('create_discipline', {...dto})
     }
     async updateDiscipline(dto: UpdateDisciplineDto) {
-    	return this.timetableClient.send('update_discipline', {dto})
+    	return this.timetableClient.send('update_discipline', {...dto})
     }
     async deleteDiscipline(id: number) {
     	return this.timetableClient.send('delete_discipline', {id})
@@ -178,10 +177,10 @@ export class TimetableService {
     	return this.timetableClient.send('one_editTimetable', {id})
     }
     async createEditTimetable(dto: CreateEditTimetableDto) {
-    	return this.timetableClient.send('create_editTimetable', {dto})
+    	return this.timetableClient.send('create_editTimetable', {...dto})
     }
     async updateEditTimetable(dto: UpdateEditTimetableDto) {
-    	return this.timetableClient.send('update_editTimetable', {dto})
+    	return this.timetableClient.send('update_editTimetable', {...dto})
     }
     async deleteEditTimetable(id: number) {
     	return this.timetableClient.send('delete_editTimetable', {id})
@@ -195,10 +194,10 @@ export class TimetableService {
     	return this.timetableClient.send('one_fullTimetable', {id})
     }
     async createFullTimetable(dto: CreateFullTimetableDto) {
-    	return this.timetableClient.send('create_fullTimetable', {dto})
+    	return this.timetableClient.send('create_fullTimetable', {...dto})
     }
     async updateFullTimetable(dto: UpdateFullTimetableDto) {
-    	return this.timetableClient.send('update_fullTimetable', {dto})
+    	return this.timetableClient.send('update_fullTimetable', {...dto})
     }
     async deleteFullTimetable(id: number) {
     	return this.timetableClient.send('delete_fullTimetable', {id})
@@ -212,10 +211,10 @@ export class TimetableService {
     	return this.timetableClient.send('one_group', {id})
     }
     async createGroup(dto: CreateGroupDto) {
-    	return this.timetableClient.send('create_group', {dto})
+    	return this.timetableClient.send('create_group', {...dto})
     }
     async updateGroup(dto: UpdateGroupDto) {
-    	return this.timetableClient.send('update_group', {dto})
+    	return this.timetableClient.send('update_group', {...dto})
     }
     async deleteGroup(id: number) {
     	return this.timetableClient.send('delete_group', {id})
@@ -229,10 +228,10 @@ export class TimetableService {
     	return this.timetableClient.send('one_loadTeach', {id})
     }
     async createLoadTeach(dto: CreateLoadTeachDto) {
-    	return this.timetableClient.send('create_loadTeach', {dto})
+    	return this.timetableClient.send('create_loadTeach', {...dto})
     }
     async updateLoadTeach(dto: UpdateLoadTeachDto) {
-    	return this.timetableClient.send('update_loadTeach', {dto})
+    	return this.timetableClient.send('update_loadTeach', {...dto})
     }
     async deleteLoadTeach(id: number) {
     	return this.timetableClient.send('delete_loadTeach', {id})
@@ -246,10 +245,10 @@ export class TimetableService {
     	return this.timetableClient.send('one_maketTimetable', {id})
     }
     async createMaketTimetable(dto: CreateMaketTimetableDto) {
-    	return this.timetableClient.send('create_maketTimetable', {dto})
+    	return this.timetableClient.send('create_maketTimetable', {...dto})
     }
     async updateMaketTimetable(dto: UpdateMaketTimetableDto) {
-    	return this.timetableClient.send('update_maketTimetable', {dto})
+    	return this.timetableClient.send('update_maketTimetable', {...dto})
     }
     async deleteMaketTimetable(id: number) {
     	return this.timetableClient.send('delete_maketTimetable', {id})
@@ -263,10 +262,10 @@ export class TimetableService {
     	return this.timetableClient.send('one_speciality', {id})
     }
     async createSpeciality(dto: CreateSpecialityDto) {
-    	return this.timetableClient.send('create_speciality', {dto})
+    	return this.timetableClient.send('create_speciality', {...dto})
     }
     async updateSpeciality(dto: UpdateSpecialityDto) {
-    	return this.timetableClient.send('update_speciality', {dto})
+    	return this.timetableClient.send('update_speciality', {...dto})
     }
     async deleteSpeciality(id: number) {
     	return this.timetableClient.send('delete_speciality', {id})
@@ -280,10 +279,10 @@ export class TimetableService {
     	return this.timetableClient.send('one_student', {id})
     }
     async createStudent(dto: CreateStudentDto) {
-    	return this.timetableClient.send('create_student', {dto})
+    	return this.timetableClient.send('create_student', {...dto})
     }
     async updateStudent(dto: UpdateStudentDto) {
-    	return this.timetableClient.send('update_student', {dto})
+    	return this.timetableClient.send('update_student', {...dto})
     }
     async deleteStudent(id: number) {
     	return this.timetableClient.send('delete_student', {id})
@@ -297,10 +296,10 @@ export class TimetableService {
     	return this.timetableClient.send('one_teacher', {id})
     }
     async createTeacher(dto: CreateTeacherDto) {
-    	return this.timetableClient.send('create_teacher', {dto})
+    	return this.timetableClient.send('create_teacher', {...dto})
     }
     async updateTeacher(dto: UpdateTeacherDto) {
-    	return this.timetableClient.send('update_teacher', {dto})
+    	return this.timetableClient.send('update_teacher', {...dto})
     }
     async deleteTeacher(id: number) {
     	return this.timetableClient.send('delete_teacher', {id})

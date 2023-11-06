@@ -6,33 +6,43 @@ import { ApiProperty } from "@nestjs/swagger";
 
 
 interface AuditoriumTypeCreationAttrs {
-
+    number: number
+    title: string
+    count_computer: number
+    ownerTeacherId
+    count_week
 }
 
 @Table({tableName: 'auditoriums', timestamps: false})
 export class Auditorium extends Model<Auditorium, AuditoriumTypeCreationAttrs> {
-    
+    @ApiProperty()
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number
 
+    @ApiProperty()
     @Column({type: DataType.INTEGER, allowNull: false})
     number: number
 
+    @ApiProperty()
     @Column({type: DataType.CHAR, allowNull: false})
     title: string
 
+    @ApiProperty()
     @Column({type: DataType.BOOLEAN, allowNull: false})
     count_seat: boolean
 
+    @ApiProperty()
     @Column({type: DataType.INTEGER, allowNull: false})
     count_computer: number
 
+    @ApiProperty()
     @ForeignKey(() => Teacher)
     @Column({type: DataType.INTEGER, allowNull: false})
     ownerTeacherId: number
     @BelongsTo(() => Teacher)
     teacher: Teacher
 
+    @ApiProperty()
     @Column({type: DataType.INTEGER, allowNull: false})
     count_week: number
 

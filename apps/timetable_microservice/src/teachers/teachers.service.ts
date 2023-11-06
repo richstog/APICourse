@@ -11,17 +11,17 @@ export class TeachersService {
 
         async allTeachers() {
             const teachers = await this.teacherRepository.findAll()
-            return teachers
+            return JSON.stringify(teachers)
         }
 
         async oneTeacher(id: number) {
             const teacher = await this.teacherRepository.findByPk(id)
-            return teacher
+            return JSON.stringify(teacher)
         }
 
         async createTeacher(dto: CreateTeacherDto) {
             const teacher = await this.teacherRepository.create({...dto})
-            return teacher
+            return JSON.stringify(teacher)
         }
 
         async updateTeacher(dto: UpdateTeacherDto) {
@@ -30,6 +30,6 @@ export class TeachersService {
                 {...data},
                 {where: {id}}
             )
-            return teacher
+            return JSON.stringify(teacher)
         }
 }
