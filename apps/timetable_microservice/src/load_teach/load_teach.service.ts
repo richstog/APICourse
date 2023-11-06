@@ -32,4 +32,9 @@ export class LoadTeachService {
             )
             return JSON.stringify(loadTeach)
         }
+
+        async deleteLoadTeach(id: number) {
+            const loadTeach = await this.loadTeachRepository.destroy({where: {id}})
+            return JSON.stringify(loadTeach)
+        }
 }

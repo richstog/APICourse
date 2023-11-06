@@ -32,4 +32,9 @@ export class CtsService {
             )
             return JSON.stringify(cts)
         }
+
+        async deleteCTS(id: number) {
+            const cts = await this.ctsRepository.destroy({where: {id}})
+            return JSON.stringify(cts)
+        }
 }

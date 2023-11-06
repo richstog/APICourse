@@ -32,4 +32,9 @@ export class StudentsService {
             )
             return JSON.stringify(student)
         }
+
+        async deleteStudent(id: number) {
+            const student = await this.studentRepository.destroy({where: {id}})
+            return JSON.stringify(student)
+        }
 }

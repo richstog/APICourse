@@ -32,4 +32,9 @@ export class MaketTimetableService {
             )
             return JSON.stringify(maketTimeTable)
         }
+
+        async deleteMaketTimetable(id: number) {
+            const maketTimeTable = await this.maketTimeTableRepository.destroy({where: {id}})
+            return JSON.stringify(maketTimeTable)
+        }
 }

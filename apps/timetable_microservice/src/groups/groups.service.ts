@@ -32,4 +32,9 @@ export class GroupsService {
             )
             return JSON.stringify(group)
         }
+
+        async deleteGroup(id: number) {
+            const group = await this.groupRepository.destroy({where: {id}})
+            return JSON.stringify(group)
+        }
 }

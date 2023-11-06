@@ -32,4 +32,10 @@ export class FullTimetableService {
             )
             return JSON.stringify(fullTimetable)
         }
+
+        async deleteFullTimetable(id: number) {
+            const fullTimetable = await this.fullTimetableRepository.destroy({where: {id}})
+            return JSON.stringify(fullTimetable)
+        }
+
 }

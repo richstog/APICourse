@@ -32,4 +32,9 @@ export class EditTimetableService {
             )
             return JSON.stringify(editTimetable)
         }
+
+        async deleteEditTimetable(id: number) {
+            const editTimetable = await this.editTimetableRepository.destroy({where: {id}})
+            return JSON.stringify(editTimetable)
+        }
 }
