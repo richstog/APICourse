@@ -30,4 +30,11 @@ export class AuditoriumsController {
         const auditorium = await this.auditoriumsService.updateAuditorium(dto)
         return auditorium
     }
+
+    @MessagePattern('delete_auditorium')
+    async deleteAuditorium(id: number) {
+        const auditorium = await this.auditoriumsService.deleteAuditorium(id)
+        return auditorium
+    }
+
 }

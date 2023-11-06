@@ -5,6 +5,7 @@ import { CreateAuditoriumDto, UpdateAuditoriumDto } from '@app/common';
 
 @Injectable()
 export class AuditoriumsService {
+
     constructor(
         @InjectModel(Auditorium) private auditoriumRepository: typeof Auditorium,
         ) {}
@@ -30,6 +31,11 @@ export class AuditoriumsService {
                 {...data},
                 {where: {id}}
             )
+            return JSON.stringify(auditorium)
+        }
+
+        async deleteAuditorium(id: number) {
+            const auditorium = await this.auditoriumRepository.destroy({where: {id}})
             return JSON.stringify(auditorium)
         }
 }

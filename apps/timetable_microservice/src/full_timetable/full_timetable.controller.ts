@@ -31,4 +31,9 @@ export class FullTimetableController {
         return fullTimetable
     }
 
+    @MessagePattern('delete_fullTimetable')
+    async deleteFullTimetable(id: number) {
+        const fullTimetable = await this.fullTimetableService.deletefullTimetable(id)
+        return fullTimetable
+    }
 }

@@ -30,4 +30,10 @@ export class CtsController {
         const cts = await this.ctsService.updateCTS(dto)
         return cts
     }
+
+    @MessagePattern('delete_cts')
+    async deleteCTS(id: number) {
+        const cts = await this.ctsService.deleteCTS(id)
+        return cts
+    }
 }

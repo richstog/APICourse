@@ -30,4 +30,10 @@ export class DisciplinesController {
         const discipline = await this.disciplinesService.updateDiscipline(dto)
         return discipline
     }
+
+    @MessagePattern('delete_discipline')
+    async deleteDiscipline(id: number) {
+        const discipline = await this.disciplinesService.deleteDiscipline(id)
+        return discipline
+    }
 }

@@ -30,4 +30,10 @@ export class EditTimetableController {
         const editTimetable = await this.editTimetableService.updateEditTimetable(dto)
         return editTimetable
     }
+
+    @MessagePattern('delete_editTimetable')
+    async deleteEditTimetable(id: number) {
+        const editTimetable = await this.editTimetableService.deleteEditTimetable(id)
+        return editTimetable
+    }
 }

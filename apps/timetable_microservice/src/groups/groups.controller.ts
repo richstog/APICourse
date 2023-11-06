@@ -31,4 +31,10 @@ export class GroupsController {
         return group
     }
 
+    @MessagePattern('delete_group')
+    async deleteGroup(id: number) {
+        const group = await this.groupsService.deleteGroup(id)
+        return group
+    }
+
 }

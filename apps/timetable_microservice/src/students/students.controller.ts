@@ -31,4 +31,10 @@ export class StudentsController {
         return student
     }
 
+    @MessagePattern('delete_student')
+    async deleteStudent(id: number) {
+        const student = await this.studentsService.deleteStudent(id)
+        return student
+    }
+
 }

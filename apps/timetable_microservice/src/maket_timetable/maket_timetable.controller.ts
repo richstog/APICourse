@@ -31,4 +31,10 @@ export class MaketTimetableController {
         return maketTimetable
     }
 
+    @MessagePattern('delete_maketTimetable')
+    async deleteMaketTimetable(id: number) {
+        const maketTimetable = await this.maketTimetableService.deleteMaketTimetable(id)
+        return maketTimetable
+    }
+
 }

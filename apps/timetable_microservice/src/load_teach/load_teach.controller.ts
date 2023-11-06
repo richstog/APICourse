@@ -30,4 +30,10 @@ export class LoadTeachController {
         const loadTeach = await this.loadTeachService.updateLoadTeach(dto)
         return loadTeach
     }
+
+    @MessagePattern('delete_loadTeach')
+    async deleteLoadTeach(id: number) {
+        const loadTeach = await this.loadTeachService.deleteLoadTeach(id)
+        return loadTeach
+    }
 }

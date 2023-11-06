@@ -15,19 +15,25 @@ export class SpecialtiesController {
 
     @MessagePattern('one_speciality')
     async oneSpeciality(id: number) {
-        const specialty = await this.specialtiesService.oneSpeciality(id)
-        return specialty
+        const speciality = await this.specialtiesService.oneSpeciality(id)
+        return speciality
     }
 
     @MessagePattern('create_speciality')
     async createSpeciality(dto: CreateSpecialityDto) {
-        const specialty = await this.specialtiesService.createSpeciality(dto)
-        return specialty
+        const speciality = await this.specialtiesService.createSpeciality(dto)
+        return speciality
     }
 
     @MessagePattern('update_speciality')
     async updateSpeciality(dto: UpdateSpecialityDto) {
-        const specialty = await this.specialtiesService.updateSpeciality(dto)
-        return specialty
+        const speciality = await this.specialtiesService.updateSpeciality(dto)
+        return speciality
+    }
+
+    @MessagePattern('delete_speciality')
+    async deleteSpeciality(id: number) {
+        const speciality = await this.specialtiesService.deleteSpeciality(id)
+        return speciality
     }
 }
