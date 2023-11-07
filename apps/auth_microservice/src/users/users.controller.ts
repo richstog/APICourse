@@ -1,7 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { UsersService } from './users.service';
-import { LoginUserDto, RegistUserDto } from '@app/common';
+import { LoginUserDto, RegistUserDto, UpdateUserDto } from '@app/common';
 
 @Controller('users')
 export class UsersController {
@@ -34,5 +34,10 @@ export class UsersController {
     async deleteLogin(id: number) {
         const user = this.usersService.deleteUser(id)
         return JSON.stringify(user)
+    }
+
+    @MessagePattern('update_user')
+    async updateUser(dto: UpdateUserDto) {
+        const user = this.usersService.updateUser(dto)
     }
 }

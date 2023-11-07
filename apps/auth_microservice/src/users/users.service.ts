@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from './users.model';
-import { CreateUserRoleDto, LoginUserDto, RegistUserDto } from '@app/common';
+import { CreateUserRoleDto, LoginUserDto, RegistUserDto, UpdateUserDto } from '@app/common';
 import { RolesService } from '../roles/roles.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt'
@@ -32,12 +32,12 @@ export class UsersService {
 
     async getAllUsers() {
         const users = await this.userRepository.findAll({include: {all: true}})
-        return users
+        return JSON.stringify(users)
     }
 
     async getUserByLogin(login: string) {
         const user = await this.userRepository.findOne({where: {login}, include: {all: true}})
-        return user
+        return JSON.stringify(user)
     }
 
     async validateUser(loginUserDto: LoginUserDto) {
@@ -72,7 +72,15 @@ export class UsersService {
     }
 
     async deleteUser(id: number) {
-        const user = this.userRepository.destroy({where: {id}})
-        return user
+        const user = await this.userRepository.destroy({where: {id}})
+        return JSON.stringify(user)
+    }
+
+    async updateUser(updateUserDto: UpdateUserDto) {
+        const {id, ...data} = updateUserDto
+        const user = await this.userRepository.update(
+            {...data}, {where: {id}}
+        )
+        return JSON.stringify(user)
     }
 }

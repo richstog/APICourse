@@ -33,7 +33,7 @@ export class RolesService {
         return role
     }
 
-    async updateRoleById(createRoleDto: CreateRoleDto) {
+    async updateRole(createRoleDto: CreateRoleDto) {
         const role = await this.roleRepository.update({value: createRoleDto.value, description: createRoleDto.description}, {where: {value: createRoleDto.value}})
         return role
     }

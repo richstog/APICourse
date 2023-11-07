@@ -1,9 +1,16 @@
+import { from } from 'rxjs'
+
 // AUTHORIZATION
-export * from './dto/registr_user.dto'
-export * from './dto/login_user.dto'
-export * from './dto/create_role.dto'
+export * from './dto/auth/registr_user.dto'
+export * from './dto/auth/login_user.dto'
+export * from './dto/auth/create_role.dto'
 export * from './outputs/object-operation.output'
-export * from './dto/add_user_role.dto'
+export * from './dto/auth/add_user_role.dto'
+export * from './dto/auth/update_user.dto'
+export * from './dto/auth/update_role.dto'
+export * from './dto/auth/create_access.dto'
+export * from './dto/auth/update_access.dto'
+export * from './dto/auth/add_user_access.dto'
 
 // TIMETABLE
 
@@ -36,3 +43,4 @@ export * from './dto/timetable/update_maket_timetable.dto'
 export * from './dto/timetable/update_speciality.dto'
 export * from './dto/timetable/update_student.dto'
 export * from './dto/timetable/update_teacher.dto'
+
