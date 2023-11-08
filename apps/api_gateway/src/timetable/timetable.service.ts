@@ -23,6 +23,7 @@ import {
     UpdateStudentDto,
     CreateTeacherDto,
     UpdateTeacherDto,
+    RegistUserDto,
 } from '@app/common';
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
@@ -92,6 +93,7 @@ export class TimetableService implements OnModuleInit {
             'create_teacher',
             'update_teacher',
             'delete_teacher',
+            'create_user'
         ];
     
         await Promise.all(
@@ -99,6 +101,10 @@ export class TimetableService implements OnModuleInit {
         );
     
         await this.timetableClient.connect();
+    }
+
+    async createUser(dto: RegistUserDto) {
+        return this.timetableClient.send('create_user', {...dto})
     }
 
     //Auditorium gateway controllers
@@ -279,6 +285,7 @@ export class TimetableService implements OnModuleInit {
     	return this.timetableClient.send('one_student', id)
     }
     async createStudent(dto: CreateStudentDto) {
+        console.log('Сервис студента', dto)
     	return this.timetableClient.send('create_student', {...dto})
     }
     async updateStudent(dto: UpdateStudentDto) {

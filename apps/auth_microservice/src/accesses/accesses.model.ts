@@ -17,7 +17,7 @@ export class Access extends Model<Access> {
 
     @ApiProperty()
     @Column({type: DataType.STRING, allowNull: true})
-    discription: string
+    description: string
 
     @BelongsToMany(() => User, () => UsersAccesses)
     users: User[]

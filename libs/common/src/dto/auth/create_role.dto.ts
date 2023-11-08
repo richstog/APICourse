@@ -5,5 +5,5 @@ export class CreateRoleDto {
     value: string
 
     @ApiProperty()
-    description?: string
+    description: string
 }

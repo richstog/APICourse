@@ -1,20 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger"
 import { IsEmail, IsString, Max, Min } from "class-validator"
 
-export class RegistUserDto {
-
-    @ApiProperty()
-    @IsString()
-    surname: string
-
-    @ApiProperty()
-    @IsString()
-    name: string
-
-    @ApiProperty()
-    @IsString()
-    middlename: string
-
+export class CreateUserDto {
     @ApiProperty()
     @Min(6)
     @Max(20)
@@ -30,8 +17,6 @@ export class RegistUserDto {
     password: string
 
     @ApiProperty()
-    roleValue: string
-
-    @ApiProperty()
-    groupId?: number
+    @IsString()
+    roleValue
 }

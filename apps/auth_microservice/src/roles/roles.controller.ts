@@ -16,12 +16,13 @@ export class RolesController {
 
     @MessagePattern('one_role')
     async oneRole(id: number) {
-        const role = await this.rolesService.oneRole(id)
+        const role = await this.rolesService.getRoleById(id)
         return role
     }
 
     @MessagePattern('create_role')
     async createRole(dto: CreateRoleDto) {
+        console.log(dto)
         const role = await this.rolesService.createRole(dto)
         return role
     }
@@ -34,7 +35,7 @@ export class RolesController {
 
     @MessagePattern('delete_role')
     async deleteRole(id: number) {
-        const role = await this.rolesService.deleteRole(id)
+        const role = await this.rolesService.deleteRoleById(id)
         return role
     }
 }

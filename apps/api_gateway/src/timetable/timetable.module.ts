@@ -20,10 +20,12 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
           }
         }
       }
-    ])
+    ]),
   ],
   providers: [TimetableService],
   controllers: [TimetableController],
-  exports: []
+  exports: [
+    TimetableService
+  ]
 })
 export class TimetableModule {}

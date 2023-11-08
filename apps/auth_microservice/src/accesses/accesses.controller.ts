@@ -4,7 +4,7 @@ import { AccessesService } from './accesses.service';
 import { CreateAccessDto, UpdateAccessDto } from '@app/common';
 
 @Controller('accesses')
-export class AccesssController {
+export class AccessesController {
 
     constructor(private readonly accessesService: AccessesService) {}
 
@@ -22,6 +22,7 @@ export class AccesssController {
 
     @MessagePattern('create_access')
     async createAccess(dto: CreateAccessDto) {
+        console.log(dto)
         const access = await this.accessesService.createAccess(dto)
         return access
     }

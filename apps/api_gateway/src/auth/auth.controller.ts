@@ -1,32 +1,71 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, ValidationPipe } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateAccessDto, CreateRoleDto, CreateUserAccessDto, CreateUserRoleDto, LoginUserDto, RegistUserDto, UpdateAccessDto, UpdateRoleDto, UpdateUserDto } from '@app/common';
+import { CreateAccessDto, CreateRoleDto, CreateStudentDto, CreateTeacherDto, CreateUserAccessDto, CreateUserRoleDto, LoginUserDto, RegistUserDto, UpdateAccessDto, UpdateRoleDto, UpdateUserDto } from '@app/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Role } from 'apps/auth_microservice/src/roles/roles.model';
 import { User } from 'apps/auth_microservice/src/users/users.model';
 import { UsersRoles } from 'apps/auth_microservice/src/users_roles/users_roles.model';
 import { UsersAccesses } from 'apps/auth_microservice/src/users_accesses/uses_accesses.model';
+import { TimetableMicroserviceService } from 'apps/timetable_microservice/src/timetable_microservice.service';
+import { TimetableService } from '../timetable/timetable.service';
+import { Access } from 'apps/auth_microservice/src/accesses/accesses.model';
+import { create } from 'domain';
+import { KafkaMessage } from 'kafkajs';
+
+interface UUU {
+    id
+}
 
 @Controller('auth')
 export class AuthController {
 
-    constructor(private readonly authService: AuthService) {}
+    constructor(
+        private readonly authService: AuthService,
+        private readonly timetableService: TimetableService
+        ) {}
 
 
     @ApiTags('User')
     @ApiOperation({summary: 'Регистрация user'})
     @ApiResponse({status: 200, type: User})
     @Post('/user/registr')
-    async registrUser(@Body() registrUserDto: RegistUserDto) {
-        return this.authService.registrUser(registrUserDto)
+    async registrUser(@Body() dto: RegistUserDto) {
+        return await this.authService.registrUser(dto)
+        
+        
+        //console.log(JSON.parse(created_user))
+        // let tt_user = {}
+        // if (dto.roleValue === 'STUDENT') {
+        //     console.log('Я СТУДЕНТ')
+        //     const timetable_service_user: CreateStudentDto = {
+        //         surname: dto.surname,
+        //         name: dto.name,
+        //         middle_name: dto.middlename,
+        //         userId: 678,
+        //         group_id: dto.groupId
+        //     }
+        //     tt_user = await this.timetableService.createStudent(timetable_service_user)
+        // }
+        // else if (dto.roleValue === 'TEACHER') {
+        //     const timetable_service_user: CreateTeacherDto = {
+        //         surname: dto.surname,
+        //         name: dto.name,
+        //         middle_name: dto.middlename,
+        //         userId: created_user['id']
+        //     }
+        //     tt_user = await this.timetableService.createTeacher(timetable_service_user)
+        // }
+        // else {
+        //     console.log('Ошибка непонятия')
+        // }
     }
 
     @ApiTags('User')
     @ApiOperation({summary: 'Вход user'})
     @ApiResponse({status: 200, type: User})
-    @Get('/user/login')
+    @Post('/user/login')
     async loginUser(@Body() loginUserDto: LoginUserDto) {
-        this.authService.loginUser(loginUserDto)
+        return await this.authService.loginUser(loginUserDto)
     }
 
     @ApiTags('User')
@@ -34,7 +73,7 @@ export class AuthController {
     @ApiResponse({status: 200, type: User})
     @Delete('/user:id')
     async deleteUser(@Param('id') id: number) {
-        this.authService.deleteUser(id)
+        return await this.authService.deleteUser(id)
     }
 
     @ApiTags('User')
@@ -42,7 +81,7 @@ export class AuthController {
     @ApiResponse({status: 200, type: User})
     @Get('/user/:login')
     async getUserByLogin(@Param('login') login: string) {
-        this.authService.getUserByLogin(login)
+        return await this.authService.getUserByLogin(login)
     }
 
     @ApiTags('User')
@@ -50,15 +89,15 @@ export class AuthController {
     @ApiResponse({status: 200, type: [User]})
     @Get('/user')
     async allUsers() {
-        return this.authService.allUsers()
+        return await this.authService.allUsers()
     }
 
     @ApiTags('User')
     @ApiOperation({summary: 'Редактировать user'})
     @ApiResponse({status: 200, type: User})
     @Put('/user')
-    async updateUser(updateUserDto: UpdateUserDto) {
-        return this.authService.updateUser(updateUserDto)
+    async updateUser(@Body() updateUserDto: UpdateUserDto) {
+        return await this.authService.updateUser(updateUserDto)
     }
 
     // UserRole
@@ -66,16 +105,16 @@ export class AuthController {
     @ApiOperation({summary: 'Добавить роль пользователю'})
     @ApiResponse({status: 200, type: UsersRoles})
     @Post('/user/role')
-    async addRoleToUser(dto: CreateUserRoleDto) {
-        this.authService.addRoleToUser(dto)
+    async addRoleToUser(@Body() dto: CreateUserRoleDto) {
+        return await this.authService.addRoleToUser(dto)
     }
 
     @ApiTags('UserRole')
     @ApiOperation({summary: 'Удалить роль пользователя'})
     @ApiResponse({status: 200, type: UsersRoles})
     @Delete('/user/role')
-    async deleteRoleToUser(dto: CreateUserRoleDto) {
-        this.authService.deleteRoleToUser(dto)
+    async deleteRoleToUser(@Body() dto: CreateUserRoleDto) {
+        return await this.authService.deleteRoleToUser(dto)
     }
 
     // Roles
@@ -85,35 +124,35 @@ export class AuthController {
     @ApiResponse({status: 200, type: [Role]})
     @Get('/role')
     async allRole() {
-    	return this.authService.allRole()
+    	return await this.authService.allRole()
     }
     @ApiTags('Role')
     @ApiOperation({summary: 'Получить role'})
     @ApiResponse({status: 200, type: Role})
     @Get('/role/:id')
     async oneRole(@Param('id') id: number) {
-    	return this.authService.oneRole(id)
+    	return await this.authService.oneRole(id)
     }
     @ApiTags('Role')
     @ApiOperation({summary: 'Создать role'})
     @ApiResponse({status: 200, type: Role})
     @Post('/role')
     async createRole(@Body() dto: CreateRoleDto) {
-    	return this.authService.createRole(dto)
+    	return await this.authService.createRole(dto)
     }
     @ApiTags('Role')
     @ApiOperation({summary: 'Изменить role'})
     @ApiResponse({status: 200, type: Role})
     @Put('/role')
     async updateRole(@Body() dto: UpdateRoleDto) {
-    	return this.authService.updateRole(dto)
+    	return await this.authService.updateRole(dto)
     }
     @ApiTags('Role')
     @ApiOperation({summary: 'Удалить role'})
     @ApiResponse({status: 200, type: Role})
     @Delete('/role/:id')
     async deleteRole(@Param('id') id: number) {
-    	return this.authService.deleteRole(id)
+    	return await this.authService.deleteRole(id)
     }
 
     // UserAccess
@@ -122,7 +161,7 @@ export class AuthController {
     @ApiResponse({status: 200, type: UsersRoles})
     @Post('/user/role')
     async addAccessToUser(dto: CreateUserAccessDto) {
-        this.authService.addAccessToUser(dto)
+        return await this.authService.addAccessToUser(dto)
     }
 
     @ApiTags('UserRole')
@@ -130,43 +169,43 @@ export class AuthController {
     @ApiResponse({status: 200, type: UsersRoles})
     @Delete('/user/role')
     async deleteAccessToUser(dto: CreateUserAccessDto) {
-        this.authService.deleteAccessToUser(dto)
+        return await this.authService.deleteAccessToUser(dto)
     }
 
     // Accesses
     @ApiTags('Access')
     @ApiOperation({summary: 'Получить всех access'})
-    @ApiResponse({status: 200, type: [UsersAccesses]})
+    @ApiResponse({status: 200, type: [Access]})
     @Get('/access')
     async allAccess() {
-    	return this.authService.allAccess()
+    	return await this.authService.allAccess()
     }
     @ApiTags('Access')
     @ApiOperation({summary: 'Получить access'})
-    @ApiResponse({status: 200, type: UsersAccesses})
+    @ApiResponse({status: 200, type: Access})
     @Get('/access/:id')
     async oneAccess(@Param('id') id: number) {
-    	return this.authService.oneAccess(id)
+    	return await this.authService.oneAccess(id)
     }
     @ApiTags('Access')
     @ApiOperation({summary: 'Создать access'})
-    @ApiResponse({status: 200, type: UsersAccesses})
+    @ApiResponse({status: 200, type: Access})
     @Post('/access')
     async createAccess(@Body() dto: CreateAccessDto) {
-    	return this.authService.createAccess(dto)
+    	return await this.authService.createAccess(dto)
     }
     @ApiTags('Access')
     @ApiOperation({summary: 'Изменить access'})
-    @ApiResponse({status: 200, type: UsersAccesses})
+    @ApiResponse({status: 200, type: Access})
     @Put('/access')
     async updateAccess(@Body() dto: UpdateAccessDto) {
-    	return this.authService.updateAccess(dto)
+    	return await this.authService.updateAccess(dto)
     }
     @ApiTags('Access')
     @ApiOperation({summary: 'Удалить access'})
-    @ApiResponse({status: 200, type: UsersAccesses})
+    @ApiResponse({status: 200, type: Access})
     @Delete('/access/:id')
     async deleteAccess(@Param('id') id: number) {
-    	return this.authService.deleteAccess(id)
+    	return await this.authService.deleteAccess(id)
     }
 }

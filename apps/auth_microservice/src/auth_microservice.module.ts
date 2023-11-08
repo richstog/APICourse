@@ -12,9 +12,11 @@ import { AccessesModule } from './accesses/accesses.module';
 import { UsersAccessesModule } from './users_accesses/users_accesses.module';
 import { Access } from './accesses/accesses.model';
 import { UsersAccesses } from './users_accesses/uses_accesses.model';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
+    
     ConfigModule.forRoot({
       envFilePath: '.env'
     }),
@@ -31,7 +33,7 @@ import { UsersAccesses } from './users_accesses/uses_accesses.model';
     UsersModule,
     RolesModule,
     JwtModule.register({
-      secret: process.env.SECRET,
+      secret: process.env.SECRET || 'ZXC_ARISTOKRAT',
       signOptions: {
         expiresIn: '24h'
       }

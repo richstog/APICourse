@@ -11,6 +11,9 @@ import { Student } from './students.model';
     forwardRef(() => TimetableMicroserviceModule)
   ],
   controllers: [StudentsController],
-  providers: [StudentsService]
+  providers: [StudentsService],
+  exports: [
+    StudentsService
+  ]
 })
 export class StudentsModule {}

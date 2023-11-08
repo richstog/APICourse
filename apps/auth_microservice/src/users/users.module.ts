@@ -9,12 +9,31 @@ import { RolesModule } from '../roles/roles.module';
 import { Access } from '../accesses/accesses.model';
 import { UsersAccesses } from '../users_accesses/uses_accesses.model';
 import { UsersRoles } from '../users_roles/users_roles.model';
+import { AccessesModule } from '../accesses/accesses.module';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
+    ClientsModule.register([
+      {
+        name: 'TIMETABLE_MICROSERVICE',
+        transport: Transport.KAFKA,
+        options: {
+          client: {
+            clientId: 'timetable',
+            brokers: ['localhost:9092']
+          },
+          //producerOnlyMode: true,
+          consumer: {
+            groupId: 'timetable_consumer'
+          }
+        }
+      }
+    ]),
     SequelizeModule.forFeature([User, Role, Access, UsersAccesses, UsersRoles]),
     forwardRef(() => AuthMicroserviceModule),
-    RolesModule
+    RolesModule,
+    AccessesModule
   ],
   providers: [UsersService],
   controllers: [UsersController],

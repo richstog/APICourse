@@ -9,8 +9,9 @@ export class RolesService {
     constructor(@InjectModel(Role) private roleRepository: typeof Role) {}
 
     async createRole(createRoleDto: CreateRoleDto) {
+        console.log(createRoleDto)
         const role = await this.roleRepository.create(createRoleDto)
-        return role
+        return JSON.stringify(role)
     }
 
     async deleteRoleById(id: number) {
@@ -25,7 +26,7 @@ export class RolesService {
 
     async getRoleByValue(value: string) {
         const role = await this.roleRepository.findOne({where: {value}})
-        return role
+        return JSON.stringify(role)
     }
 
     async getRoleById(id: number) {
@@ -35,6 +36,11 @@ export class RolesService {
 
     async updateRole(createRoleDto: CreateRoleDto) {
         const role = await this.roleRepository.update({value: createRoleDto.value, description: createRoleDto.description}, {where: {value: createRoleDto.value}})
-        return role
+        return JSON.stringify(role)
+    }
+
+    async allRoles() {
+        const roles = await this.roleRepository.findAll();
+        return JSON.stringify(roles)
     }
 }

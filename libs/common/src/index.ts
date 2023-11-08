@@ -11,9 +11,10 @@ export * from './dto/auth/update_role.dto'
 export * from './dto/auth/create_access.dto'
 export * from './dto/auth/update_access.dto'
 export * from './dto/auth/add_user_access.dto'
+export * from './dto/auth/create_user.dto'
 
 // TIMETABLE
-
+export * from './dto/timetable/create_user_info.dto'
 // -- CREATE
 export * from './dto/timetable/create_auditorium.dto'
 export * from './dto/timetable/create_cts.dto'

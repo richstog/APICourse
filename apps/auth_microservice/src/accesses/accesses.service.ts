@@ -18,10 +18,11 @@ export class AccessesService {
 
         async oneAccess(id: number) {
             const access = await this.accessRepository.findByPk(id)
-            return JSON.stringify(access)
+            return access
         }
 
         async createAccess(dto: CreateAccessDto) {
+            console.log(dto)
             const access = await this.accessRepository.create(dto)
             return JSON.stringify(access)
         }

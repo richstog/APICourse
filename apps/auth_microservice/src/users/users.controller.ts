@@ -1,21 +1,23 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { UsersService } from './users.service';
-import { LoginUserDto, RegistUserDto, UpdateUserDto } from '@app/common';
+import { CreateUserDto, LoginUserDto, RegistUserDto, UpdateUserDto } from '@app/common';
 
 @Controller('users')
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
-
+    
     @MessagePattern('registr_user')
-    async registrUser(registUserDto: RegistUserDto) {
-        const user = await this.usersService.registrUser(registUserDto)
-        return JSON.stringify(user)
+    async registrUser(dto: RegistUserDto) {
+        console.log(dto)
+        const token = await this.usersService.registrUser(dto)
+        return JSON.stringify(token)
     }
 
     @MessagePattern('login_user')
     async loginUser(loginUserDto: LoginUserDto) {
-        return this.usersService.loginUser(loginUserDto)
+        const token = await this.usersService.loginUser(loginUserDto)
+        return token
     }
 
     @MessagePattern('all_user')
@@ -39,5 +41,6 @@ export class UsersController {
     @MessagePattern('update_user')
     async updateUser(dto: UpdateUserDto) {
         const user = this.usersService.updateUser(dto)
+        return JSON.stringify(user)
     }
 }

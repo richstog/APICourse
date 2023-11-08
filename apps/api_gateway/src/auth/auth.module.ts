@@ -2,9 +2,12 @@ import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { Client, ClientsModule, Transport } from '@nestjs/microservices';
+import { TimetableService } from '../timetable/timetable.service';
+import { TimetableModule } from '../timetable/timetable.module';
 
 @Module({
   imports: [
+    TimetableModule,
     ClientsModule.register([
       {
         name: 'AUTH_MICROSERVICE',
@@ -20,7 +23,7 @@ import { Client, ClientsModule, Transport } from '@nestjs/microservices';
           }
         }
       }
-    ])
+    ]),
   ],
   providers: [AuthService],
   controllers: [AuthController]

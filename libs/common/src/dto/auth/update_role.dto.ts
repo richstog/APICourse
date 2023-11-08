@@ -9,5 +9,5 @@ export class UpdateRoleDto {
     value: string
 
     @ApiProperty()
-    description?: string
+    description: string
 }
