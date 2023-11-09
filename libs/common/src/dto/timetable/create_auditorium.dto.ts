@@ -8,7 +8,7 @@ export class CreateAuditoriumDto {
     title: string
 
     @ApiProperty()
-    count_seat: boolean
+    count_seat: number
 
     @ApiProperty()
     count_computer: number

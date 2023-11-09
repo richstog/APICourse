@@ -26,7 +26,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       port: parseInt(process.env.POSTGRES_PORT) || 5432,
       username: process.env.POSTGRES_USERNAME || 'postgres',
       password: process.env.POSTGRES_PASSWORD || 'rhfcbkjdf29',
-      database: process.env.POSTGRES_DATABASE || 'novgu_auth_microservice',
+      database: process.env.POSTGRES_DATABASE || 'novgu_auth_microservice_stud',
       models: [User, Role, Access, UsersAccesses, UsersRoles],
       autoLoadModels: true
     }),

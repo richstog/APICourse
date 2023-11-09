@@ -4,7 +4,6 @@ import { TimetableMicroserviceService } from './timetable_microservice.service';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { TeachersModule } from './teachers/teachers.module';
-import { StudentsModule } from './students/students.module';
 import { GroupsModule } from './groups/groups.module';
 import { SpecialtiesModule } from './specialties/specialties.module';
 import { DisciplinesModule } from './disciplines/disciplines.module';
@@ -25,7 +24,6 @@ import { Group } from './groups/groups.model';
 import { LoadTeach } from './load_teach/load_teach.model';
 import { MaketTimetable } from './maket_timetable/maket_timetable.model';
 import { Speciality } from './specialties/specialities.model';
-import { Student } from './students/students.model';
 import { Teacher } from './teachers/teachers.model';
 
 @Module({
@@ -39,12 +37,11 @@ import { Teacher } from './teachers/teachers.model';
       port: parseInt(process.env.POSTGRES_PORT) || 5432,
       username: process.env.POSTGRES_USERNAME || 'postgres',
       password: process.env.POSTGRES_PASSWORD || 'rhfcbkjdf29',
-      database: process.env.POSTGRES_DATABASE || 'novgu_timetable_microservice',
+      database: process.env.POSTGRES_DATABASE || 'novgu_timetable_microservice_stud',
       models: [],
       autoLoadModels: true
     }),
     TeachersModule,
-    StudentsModule,
     GroupsModule,
     SpecialtiesModule,
     DisciplinesModule,

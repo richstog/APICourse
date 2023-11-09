@@ -29,7 +29,7 @@ import { TimetableService } from './timetable.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Auditorium } from 'apps/timetable_microservice/src/auditoriums/auditoriums.model';
 import { Teacher } from 'apps/timetable_microservice/src/teachers/teachers.model';
-import { Student } from 'apps/timetable_microservice/src/students/students.model';
+
 import { Speciality } from 'apps/timetable_microservice/src/specialties/specialities.model';
 import { MaketTimetable } from 'apps/timetable_microservice/src/maket_timetable/maket_timetable.model';
 import { LoadTeach } from 'apps/timetable_microservice/src/load_teach/load_teach.model';
@@ -412,43 +412,6 @@ export class TimetableController {
     @Delete('/speciality/:id')
     async deleteSpeciality(@Param('id') id: number) {
     	return this.timetableService.deleteSpeciality(id)
-    }
-
-    //Student gateway controllers
-    @ApiTags('Student')
-    @ApiOperation({summary: 'Получить всех student'})
-    @ApiResponse({status: 200, type: [Student]})
-    @Get('/student')
-    async allStudent() {
-    	return this.timetableService.allStudent()
-    }
-    @ApiTags('Student')
-    @ApiOperation({summary: 'Получить student'})
-    @ApiResponse({status: 200, type: Student})
-    @Get('/student/:id')
-    async oneStudent(@Param('id') id: number) {
-    	return this.timetableService.oneStudent(id)
-    }
-    @ApiTags('Student')
-    @ApiOperation({summary: 'Создать student'})
-    @ApiResponse({status: 200, type: Student})
-    @Post('/student')
-    async createStudent(@Body() dto: CreateStudentDto) {
-    	return this.timetableService.createStudent(dto)
-    }
-    @ApiTags('Student')
-    @ApiOperation({summary: 'Изменить student'})
-    @ApiResponse({status: 200, type: Student})
-    @Put('/student')
-    async updateStudent(@Body() dto: UpdateStudentDto) {
-    	return this.timetableService.updateStudent(dto)
-    }
-    @ApiTags('Student')
-    @ApiOperation({summary: 'Удалить student'})
-    @ApiResponse({status: 200, type: Student})
-    @Delete('/student/:id')
-    async deleteStudent(@Param('id') id: number) {
-    	return this.timetableService.deleteStudent(id)
     }
 
     //Teacher gateway controllers

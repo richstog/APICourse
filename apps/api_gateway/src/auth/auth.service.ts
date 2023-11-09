@@ -35,7 +35,6 @@ export class AuthService implements OnModuleInit {
 
     // Users
     registrUser(dto: RegistUserDto) {
-        //console.log(dto)
 
         return this.authClient.send('registr_user', {...dto})
     }

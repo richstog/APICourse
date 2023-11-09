@@ -7,9 +7,5 @@ import { CreateUserInfoDto } from '@app/common';
 export class TimetableMicroserviceController {
   constructor(private readonly timetableMicroserviceService: TimetableMicroserviceService) {}
 
-  @MessagePattern('create_user')
-    async createUser(dto: CreateUserInfoDto) {
-        const user = await this.timetableMicroserviceService.createUser(dto)
-        return user
-    }
+
 }

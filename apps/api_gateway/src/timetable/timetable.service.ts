@@ -83,11 +83,6 @@ export class TimetableService implements OnModuleInit {
             'create_speciality',
             'update_speciality',
             'delete_speciality',
-            'all_student',
-            'one_student',
-            'create_student',
-            'update_student',
-            'delete_student',
             'all_teacher',
             'one_teacher',
             'create_teacher',
@@ -275,24 +270,6 @@ export class TimetableService implements OnModuleInit {
     }
     async deleteSpeciality(id: number) {
     	return this.timetableClient.send('delete_speciality', id)
-    }
-
-    //Student gateway controllers
-    async allStudent() {
-    	return this.timetableClient.send('all_student', {})
-    }
-    async oneStudent(id: number) {
-    	return this.timetableClient.send('one_student', id)
-    }
-    async createStudent(dto: CreateStudentDto) {
-        console.log('Сервис студента', dto)
-    	return this.timetableClient.send('create_student', {...dto})
-    }
-    async updateStudent(dto: UpdateStudentDto) {
-    	return this.timetableClient.send('update_student', {...dto})
-    }
-    async deleteStudent(id: number) {
-    	return this.timetableClient.send('delete_student', id)
     }
 
     //Teacher gateway controllers

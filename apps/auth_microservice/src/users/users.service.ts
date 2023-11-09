@@ -8,6 +8,7 @@ import * as bcrypt from 'bcrypt'
 import { json } from 'sequelize';
 import { AccessesService } from '../accesses/accesses.service';
 import { ClientKafka } from '@nestjs/microservices';
+import { Role } from '../roles/roles.model';
 
 @Injectable()
 export class UsersService implements OnModuleInit {
@@ -92,43 +93,35 @@ export class UsersService implements OnModuleInit {
 
     async registrUser(dto: RegistUserDto) {
 
-        // console.log(dto)
-        // const auth_service_user: CreateUserDto = {
-        //     login: dto.login,
-        //     email: dto.email,
-        //     password: dto.password,
-        //     roleValue: dto.roleValue
-        // }
+        console.log(dto)
 
-        // const condidate = JSON.parse(await this.getUserByLogin(dto.login));
-        // const role = JSON.parse(await this.roleService.getRoleByValue(dto.roleValue))
-        // if(condidate !== null) {
-        //     throw new HttpException(`A user with this login already exists, ${condidate}`, HttpStatus.BAD_REQUEST)
-        // } else if (role === null) {
-        //     throw new HttpException(`User role is undefined`, HttpStatus.BAD_REQUEST)
-        // }
-        // const hashPassword = await bcrypt.hash(dto.password, 5)
-        // const user = await this.userRepository.create({...auth_service_user, password: hashPassword})
-        // await user.$add('role', role.id)
-        // user.save()
-
-        // const token = this.loginUser({login: dto.login, password: dto.password})
+        const condidate = JSON.parse(await this.getUserByLogin(dto.login));
+        const role = JSON.parse(await this.roleService.getRoleByValue(dto.roleValue))
+        if(condidate !== null) {
+            throw new HttpException(`A user with this login already exists, ${condidate}`, HttpStatus.BAD_REQUEST)
+        } else if (role === null) {
+            throw new HttpException(`User role is undefined`, HttpStatus.BAD_REQUEST)
+        }
+        const hashPassword = await bcrypt.hash(dto.password, 5)
+        const user = await this.userRepository.create({...dto, password: hashPassword})
+        await user.$add('roles', [role.id])
+        user.roles = [role]
+        //const token = this.loginUser({login: dto.login, password: dto.password})
         
-        // return await user
+        return user
 
-        return this.timetableClient.send('all_auditorium', {})
+        //return this.timetableClient.send('all_auditorium', {})
     }
 
     async loginUser(dto: LoginUserDto) {
         console.log(dto)
         const user = await this.validateUser(dto);
-        const token = await this.generateToken(user)
-        return token
+        return this.generateToken(user)
     }
 
     async getAllUsers() {
         const users = await this.userRepository.findAll({include: {all: true}})
-        return JSON.stringify(users)
+        return users
     }
 
     async getUserByLogin(login: string) {
@@ -138,7 +131,7 @@ export class UsersService implements OnModuleInit {
 
     async validateUser(loginUserDto: LoginUserDto) {
         console.log('Валидация юзера',loginUserDto)
-        const user = await this.userRepository.findOne({where: {login: loginUserDto.login}})
+        const user = await this.userRepository.findOne({where: {login: loginUserDto.login}, include: {all: true}})
         if (user) {
             const passwordEquals = await bcrypt.compare(loginUserDto.password, user.password)
 

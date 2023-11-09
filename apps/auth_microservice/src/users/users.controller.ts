@@ -22,14 +22,12 @@ export class UsersController {
 
     @MessagePattern('all_user')
     async getUsers() {
-        const users = this.usersService.getAllUsers()
-        return JSON.stringify(users)
+        return await this.usersService.getAllUsers()
     }
 
     @MessagePattern('get_user_by_login')
     async getUserByLogin(login: string) {
-        const user = this.usersService.getUserByLogin(login)
-        return JSON.stringify(user)
+        return await this.usersService.getUserByLogin(login)
     }
 
     @MessagePattern('delete_user')

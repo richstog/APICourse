@@ -8,6 +8,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
   .setTitle('Расписание НовГУ')
   .setDescription('Документация RestAPI')
+  .addBearerAuth()
   .build()
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('/api/docs', app, document)

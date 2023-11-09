@@ -1,7 +1,6 @@
 import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
 import { Teacher } from "../teachers/teachers.model";
 import { MaketTimetable } from "../maket_timetable/maket_timetable.model";
-import { Student } from "../students/students.model";
 import { LoadTeach } from "../load_teach/load_teach.model";
 import { Speciality } from "../specialties/specialities.model";
 import { ApiProperty } from "@nestjs/swagger";
@@ -39,9 +38,6 @@ export class Group extends Model<Group, GroupCreationAttrs> {
 
     @HasMany(() => MaketTimetable)
     maket_timetables: MaketTimetable[]
-
-    @HasMany(() => Student)
-    students: Student[]
 
     @HasMany(() => LoadTeach)
     loadteaches: LoadTeach[]

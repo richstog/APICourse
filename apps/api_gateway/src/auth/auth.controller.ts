@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, ValidationPipe } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateAccessDto, CreateRoleDto, CreateStudentDto, CreateTeacherDto, CreateUserAccessDto, CreateUserRoleDto, LoginUserDto, RegistUserDto, UpdateAccessDto, UpdateRoleDto, UpdateUserDto } from '@app/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -11,6 +11,9 @@ import { TimetableService } from '../timetable/timetable.service';
 import { Access } from 'apps/auth_microservice/src/accesses/accesses.model';
 import { create } from 'domain';
 import { KafkaMessage } from 'kafkajs';
+import { Roles } from './roles.decorator';
+import { RolesGuard } from './roles.guard';
+
 
 interface UUU {
     id
@@ -71,6 +74,8 @@ export class AuthController {
     @ApiTags('User')
     @ApiOperation({summary: 'Удалить user'})
     @ApiResponse({status: 200, type: User})
+    @Roles("ADMIN")
+    @UseGuards(RolesGuard)
     @Delete('/user:id')
     async deleteUser(@Param('id') id: number) {
         return await this.authService.deleteUser(id)
@@ -86,6 +91,8 @@ export class AuthController {
 
     @ApiTags('User')
     @ApiOperation({summary: 'Получить всех user'})
+    @Roles("ADMIN")
+    @UseGuards(RolesGuard)
     @ApiResponse({status: 200, type: [User]})
     @Get('/user')
     async allUsers() {
@@ -95,6 +102,8 @@ export class AuthController {
     @ApiTags('User')
     @ApiOperation({summary: 'Редактировать user'})
     @ApiResponse({status: 200, type: User})
+    @Roles("ADMIN")
+    @UseGuards(RolesGuard)
     @Put('/user')
     async updateUser(@Body() updateUserDto: UpdateUserDto) {
         return await this.authService.updateUser(updateUserDto)
@@ -104,6 +113,8 @@ export class AuthController {
     @ApiTags('UserRole')
     @ApiOperation({summary: 'Добавить роль пользователю'})
     @ApiResponse({status: 200, type: UsersRoles})
+    @Roles("ADMIN")
+    @UseGuards(RolesGuard)
     @Post('/user/role')
     async addRoleToUser(@Body() dto: CreateUserRoleDto) {
         return await this.authService.addRoleToUser(dto)
@@ -112,6 +123,8 @@ export class AuthController {
     @ApiTags('UserRole')
     @ApiOperation({summary: 'Удалить роль пользователя'})
     @ApiResponse({status: 200, type: UsersRoles})
+    @Roles("ADMIN")
+    @UseGuards(RolesGuard)
     @Delete('/user/role')
     async deleteRoleToUser(@Body() dto: CreateUserRoleDto) {
         return await this.authService.deleteRoleToUser(dto)
@@ -136,6 +149,8 @@ export class AuthController {
     @ApiTags('Role')
     @ApiOperation({summary: 'Создать role'})
     @ApiResponse({status: 200, type: Role})
+    @Roles("ADMIN")
+    @UseGuards(RolesGuard)
     @Post('/role')
     async createRole(@Body() dto: CreateRoleDto) {
     	return await this.authService.createRole(dto)
@@ -143,6 +158,8 @@ export class AuthController {
     @ApiTags('Role')
     @ApiOperation({summary: 'Изменить role'})
     @ApiResponse({status: 200, type: Role})
+    @Roles("ADMIN")
+    @UseGuards(RolesGuard)
     @Put('/role')
     async updateRole(@Body() dto: UpdateRoleDto) {
     	return await this.authService.updateRole(dto)
@@ -150,23 +167,29 @@ export class AuthController {
     @ApiTags('Role')
     @ApiOperation({summary: 'Удалить role'})
     @ApiResponse({status: 200, type: Role})
+    @Roles("ADMIN")
+    @UseGuards(RolesGuard)
     @Delete('/role/:id')
     async deleteRole(@Param('id') id: number) {
     	return await this.authService.deleteRole(id)
     }
 
     // UserAccess
-    @ApiTags('UserRole')
-    @ApiOperation({summary: 'Добавить роль пользователю'})
+    @ApiTags('UserAccess')
+    @ApiOperation({summary: 'Добавить разрешение пользователю'})
     @ApiResponse({status: 200, type: UsersRoles})
+    @Roles("ADMIN")
+    @UseGuards(RolesGuard)
     @Post('/user/role')
     async addAccessToUser(dto: CreateUserAccessDto) {
         return await this.authService.addAccessToUser(dto)
     }
 
-    @ApiTags('UserRole')
-    @ApiOperation({summary: 'Удалить роль пользователя'})
+    @ApiTags('UserAccess')
+    @ApiOperation({summary: 'Удалить разрешение пользователя'})
     @ApiResponse({status: 200, type: UsersRoles})
+    @Roles("ADMIN")
+    @UseGuards(RolesGuard)
     @Delete('/user/role')
     async deleteAccessToUser(dto: CreateUserAccessDto) {
         return await this.authService.deleteAccessToUser(dto)
@@ -190,6 +213,8 @@ export class AuthController {
     @ApiTags('Access')
     @ApiOperation({summary: 'Создать access'})
     @ApiResponse({status: 200, type: Access})
+    @Roles("ADMIN")
+    @UseGuards(RolesGuard)
     @Post('/access')
     async createAccess(@Body() dto: CreateAccessDto) {
     	return await this.authService.createAccess(dto)
@@ -197,6 +222,8 @@ export class AuthController {
     @ApiTags('Access')
     @ApiOperation({summary: 'Изменить access'})
     @ApiResponse({status: 200, type: Access})
+    @Roles("ADMIN")
+    @UseGuards(RolesGuard)
     @Put('/access')
     async updateAccess(@Body() dto: UpdateAccessDto) {
     	return await this.authService.updateAccess(dto)
@@ -204,6 +231,8 @@ export class AuthController {
     @ApiTags('Access')
     @ApiOperation({summary: 'Удалить access'})
     @ApiResponse({status: 200, type: Access})
+    @Roles("ADMIN")
+    @UseGuards(RolesGuard)
     @Delete('/access/:id')
     async deleteAccess(@Param('id') id: number) {
     	return await this.authService.deleteAccess(id)

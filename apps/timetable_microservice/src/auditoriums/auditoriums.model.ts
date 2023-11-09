@@ -28,8 +28,8 @@ export class Auditorium extends Model<Auditorium, AuditoriumTypeCreationAttrs> {
     title: string
 
     @ApiProperty()
-    @Column({type: DataType.BOOLEAN, allowNull: false})
-    count_seat: boolean
+    @Column({type: DataType.NUMBER, allowNull: false})
+    count_seat: number
 
     @ApiProperty()
     @Column({type: DataType.INTEGER, allowNull: false})
@@ -42,13 +42,11 @@ export class Auditorium extends Model<Auditorium, AuditoriumTypeCreationAttrs> {
     @BelongsTo(() => Teacher)
     teacher: Teacher
 
-    @ApiProperty()
-    @Column({type: DataType.INTEGER, allowNull: false})
-    count_week: number
-
     @HasMany(() => EditTimetable)
     edit_timetables: EditTimetable[]
 
     @HasMany(() => MaketTimetable)
     maket_timetables: MaketTimetable[]
 }
+
+

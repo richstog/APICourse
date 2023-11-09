@@ -13,7 +13,7 @@ export class RegistUserDto {
 
     @ApiProperty()
     @IsString()
-    middlename: string
+    middle_name: string
 
     @ApiProperty()
     @Min(6)
@@ -31,7 +31,5 @@ export class RegistUserDto {
 
     @ApiProperty()
     roleValue: string
-
-    @ApiProperty()
-    groupId?: number
 }
+

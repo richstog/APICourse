@@ -20,10 +20,6 @@ export class Teacher extends Model<Teacher, TeacherCreationAttrs> {
     id: number
 
     @ApiProperty()
-    @Column({type: DataType.INTEGER, allowNull: false})
-    userId: number
-
-    @ApiProperty()
     @Column({type: DataType.STRING, allowNull: false})
     name: string
 
