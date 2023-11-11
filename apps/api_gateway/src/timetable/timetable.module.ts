@@ -11,7 +11,6 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         transport: Transport.KAFKA,
         options: {
           client: {
-            clientId: 'timetable',
             brokers: ['localhost:9092']
           },
           //producerOnlyMode: true,

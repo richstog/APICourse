@@ -28,7 +28,7 @@ export class Auditorium extends Model<Auditorium, AuditoriumTypeCreationAttrs> {
     title: string
 
     @ApiProperty()
-    @Column({type: DataType.NUMBER, allowNull: false})
+    @Column({type: DataType.INTEGER, allowNull: false})
     count_seat: number
 
     @ApiProperty()

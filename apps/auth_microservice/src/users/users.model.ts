@@ -47,3 +47,4 @@ export class User extends Model<User, UserCreationAttrs>{
     @BelongsToMany(() => Access, () => UsersAccesses)
     accesses: Access[]
 }
+

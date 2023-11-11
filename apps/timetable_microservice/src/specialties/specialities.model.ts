@@ -34,3 +34,4 @@ export class Speciality extends Model<Speciality, SpecialityCreationAttrs> {
     @HasMany(() => Group)
     groups: Group
 }
+

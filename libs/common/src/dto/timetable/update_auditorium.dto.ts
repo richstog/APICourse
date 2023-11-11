@@ -18,7 +18,4 @@ export class UpdateAuditoriumDto {
 
     @ApiProperty()
     ownerTeacherId: number
-
-    @ApiProperty()
-    count_week: number
 }

@@ -177,20 +177,20 @@ export class AuthController {
     // UserAccess
     @ApiTags('UserAccess')
     @ApiOperation({summary: 'Добавить разрешение пользователю'})
-    @ApiResponse({status: 200, type: UsersRoles})
+    @ApiResponse({status: 200, type: UsersAccesses})
     @Roles("ADMIN")
     @UseGuards(RolesGuard)
-    @Post('/user/role')
+    @Post('/user/access')
     async addAccessToUser(dto: CreateUserAccessDto) {
         return await this.authService.addAccessToUser(dto)
     }
 
     @ApiTags('UserAccess')
     @ApiOperation({summary: 'Удалить разрешение пользователя'})
-    @ApiResponse({status: 200, type: UsersRoles})
+    @ApiResponse({status: 200, type: UsersAccesses})
     @Roles("ADMIN")
     @UseGuards(RolesGuard)
-    @Delete('/user/role')
+    @Delete('/user/access')
     async deleteAccessToUser(dto: CreateUserAccessDto) {
         return await this.authService.deleteAccessToUser(dto)
     }

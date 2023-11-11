@@ -22,7 +22,9 @@ export class AuthService implements OnModuleInit {
             'one_role',
             'create_access',
             'all_access',
-            'delete_role'
+            'delete_role',
+            'add_user_role',
+            'add_user_access'
         ];
     
         await Promise.all(

@@ -21,7 +21,7 @@ export class AuditoriumsService {
         }
 
         async createAuditorium(dto: CreateAuditoriumDto) {
-            const auditorium = await this.auditoriumRepository.create(dto)
+            const auditorium = await this.auditoriumRepository.create({...dto})
             return JSON.stringify(auditorium)
         }
 

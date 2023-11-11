@@ -15,7 +15,4 @@ export class CreateAuditoriumDto {
 
     @ApiProperty()
     ownerTeacherId: number
-
-    @ApiProperty()
-    count_week: number
 }

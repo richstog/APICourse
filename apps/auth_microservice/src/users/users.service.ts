@@ -11,89 +11,16 @@ import { ClientKafka } from '@nestjs/microservices';
 import { Role } from '../roles/roles.model';
 
 @Injectable()
-export class UsersService implements OnModuleInit {
+export class UsersService {
     constructor(
         @InjectModel(User) private userRepository: typeof User,
         private roleService: RolesService,
         private jwtService: JwtService,
         private accessService: AccessesService,
-        @Inject('TIMETABLE_MICROSERVICE') private readonly timetableClient: ClientKafka
         ) {}
-        async onModuleInit() {
-            const events = [
-                'all_auditorium',
-                'one_auditorium',
-                'create_auditorium',
-                'update_auditorium',
-                'delete_auditorium',
-                'all_cts',
-                'one_cts',
-                'create_cts',
-                'update_cts',
-                'delete_cts',
-                'all_disciplineType',
-                'one_disciplineType',
-                'create_disciplineType',
-                'update_disciplineType',
-                'delete_disciplineType',
-                'all_discipline',
-                'one_discipline',
-                'create_discipline',
-                'update_discipline',
-                'delete_discipline',
-                'all_editTimetable',
-                'one_editTimetable',
-                'create_editTimetable',
-                'update_editTimetable',
-                'delete_editTimetable',
-                'all_fullTimetable',
-                'one_fullTimetable',
-                'create_fullTimetable',
-                'update_fullTimetable',
-                'delete_fullTimetable',
-                'all_group',
-                'one_group',
-                'create_group',
-                'update_group',
-                'delete_group',
-                'all_loadTeach',
-                'one_loadTeach',
-                'create_loadTeach',
-                'update_loadTeach',
-                'delete_loadTeach',
-                'all_maketTimetable',
-                'one_maketTimetable',
-                'create_maketTimetable',
-                'update_maketTimetable',
-                'delete_maketTimetable',
-                'all_speciality',
-                'one_speciality',
-                'create_speciality',
-                'update_speciality',
-                'delete_speciality',
-                'all_student',
-                'one_student',
-                'create_student',
-                'update_student',
-                'delete_student',
-                'all_teacher',
-                'one_teacher',
-                'create_teacher',
-                'update_teacher',
-                'delete_teacher',
-                'create_user'
-            ];
         
-            await Promise.all(
-                events.map(event => this.timetableClient.subscribeToResponseOf(event))
-            );
-        
-            await this.timetableClient.connect();
-        }
 
     async registrUser(dto: RegistUserDto) {
-
-        console.log(dto)
 
         const condidate = JSON.parse(await this.getUserByLogin(dto.login));
         const role = JSON.parse(await this.roleService.getRoleByValue(dto.roleValue))
@@ -106,11 +33,8 @@ export class UsersService implements OnModuleInit {
         const user = await this.userRepository.create({...dto, password: hashPassword})
         await user.$add('roles', [role.id])
         user.roles = [role]
-        //const token = this.loginUser({login: dto.login, password: dto.password})
         
         return user
-
-        //return this.timetableClient.send('all_auditorium', {})
     }
 
     async loginUser(dto: LoginUserDto) {
@@ -155,7 +79,7 @@ export class UsersService implements OnModuleInit {
         const user = await this.userRepository.findByPk(dto.userId)
         const role = await this.roleService.getRoleById(dto.roleId)
         if (role && user) {
-            await user.$add('role', role.id)
+            await user.$add('roles', role.id)
             user.save()
             return dto
         }
@@ -166,7 +90,8 @@ export class UsersService implements OnModuleInit {
         const user = await this.userRepository.findByPk(dto.userId)
         const access = await this.accessService.oneAccess(dto.accessId)
         if (access && user) {
-            await user.$add('access', access.id)
+            await user.$add('accesses', access.id)
+            
             return dto
         }
         throw new HttpException('User or access is not defined', HttpStatus.BAD_REQUEST)
